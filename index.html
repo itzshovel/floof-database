@@ -7797,20 +7797,43 @@ globalThis.RARITY_TABLE = {
         damageDealt: 0,
         hits: 0,
         deaths: 0,
-        pos: { x: 0, y: 0 },
-        prevPos: { x: 0, y: 0 },
-        vel: { x: 0, y: 0 },
+        segments: [],
       }));
       return out;
     }
 
-    function initSlotPhysics(i, ps) {
+    function segmentLocalOffsets(N) {
+      const out = [];
+      if (N <= 1) { out.push({ x: 0, y: 0 }); return out; }
+      const clusterR = Math.max(6, 3 + 1.5 * N);
+      for (let j = 0; j < N; j++) {
+        const a = (j / N) * Math.PI * 2;
+        out.push({ x: Math.cos(a) * clusterR, y: Math.sin(a) * clusterR });
+      }
+      return out;
+    }
+
+    function initSlotPhysics(i, ps, segCount) {
+      const N = Math.max(1, segCount | 0);
+      const offsets = segmentLocalOffsets(N);
       const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
-      const x = ORBIT_RADIUS * Math.cos(a);
-      const y = ORBIT_RADIUS * Math.sin(a);
-      ps.pos.x = x; ps.pos.y = y;
-      ps.prevPos.x = x; ps.prevPos.y = y;
-      ps.vel.x = 0; ps.vel.y = 0;
+      const cosA = Math.cos(a);
+      const sinA = Math.sin(a);
+      const slotTx = ORBIT_RADIUS * cosA;
+      const slotTy = ORBIT_RADIUS * sinA;
+      ps.segments = [];
+      for (let s = 0; s < N; s++) {
+        const off = offsets[s];
+        const wx = slotTx + off.x * cosA - off.y * sinA;
+        const wy = slotTy + off.x * sinA + off.y * cosA;
+        ps.segments.push({
+          offX: off.x,
+          offY: off.y,
+          pos: { x: wx, y: wy },
+          prevPos: { x: wx, y: wy },
+          vel: { x: 0, y: 0 },
+        });
+      }
     }
 
     function bootDps() {
@@ -7929,8 +7952,9 @@ globalThis.RARITY_TABLE = {
       dpsState.perSlot = makePerSlotState();
       for (let i = 0; i < NUM_SLOTS; i++) {
         const ps = dpsState.perSlot[i];
-        initSlotPhysics(i, ps);
         const entry = dpsState.loadout[i];
+        const segCount = entry ? getSegmentCount(entry.idx, entry.tier) : 1;
+        initSlotPhysics(i, ps, segCount);
         if (!entry) continue;
         const cfg = FLOOF.state.petalConfigs[entry.idx];
         const tier = cfg && cfg.tiers[entry.tier];
@@ -7994,6 +8018,8 @@ globalThis.RARITY_TABLE = {
       return ANGULAR_VELOCITY + extra * EXTRA_RADIANS_TO_RAD_PER_SEC;
     }
 
+    function getSegmentHitRadius() { return getPetalDisplayRadius() * 0.7; }
+
     function simTick() {
       const dt = SIM_TICK_DT;
       const angularVel = computeAngularVelocity();
@@ -8003,11 +8029,11 @@ globalThis.RARITY_TABLE = {
       dpsState.tickCount++;
 
       const mobR = getMobRadiusPx();
-      const petalR = getPetalDisplayRadius();
+      const segR = getSegmentHitRadius();
       const mobX = MOB_HITBOX_DISTANCE;
       const mobY = 0;
       const mobDamagePerTick = getMobDamage();
-      const minDist = petalR + mobR;
+      const minDist = segR + mobR;
       const minDist2 = minDist * minDist;
 
       for (let i = 0; i < NUM_SLOTS; i++) {
@@ -8021,56 +8047,66 @@ globalThis.RARITY_TABLE = {
         const petalBase = petals[entry.idx];
         const reloadBase = parseNumber(petalBase.reload) || 0;
         const reloadSec = reloadBase > 0 ? reloadBase / 22.5 : 0;
-        const segCount = getSegmentCount(entry.idx, entry.tier);
-        const hitDamage = (Number(tier.damage) || 0) * segCount;
+        const hitDamagePerSeg = Number(tier.damage) || 0;
         const maxHp = Number.isFinite(tier.health) ? tier.health : 0;
 
-        ps.prevPos.x = ps.pos.x;
-        ps.prevPos.y = ps.pos.y;
+        for (const seg of ps.segments) {
+          seg.prevPos.x = seg.pos.x;
+          seg.prevPos.y = seg.pos.y;
+        }
 
         if (!ps.alive) {
           if (dpsState.simT >= ps.reloadUntil) {
             ps.alive = true;
             ps.hp = maxHp;
-            initSlotPhysics(i, ps);
+            initSlotPhysics(i, ps, ps.segments.length || 1);
           }
           continue;
         }
 
         const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
-        const tx = ORBIT_RADIUS * Math.cos(a);
-        const ty = ORBIT_RADIUS * Math.sin(a);
-        const sdx = tx - ps.pos.x;
-        const sdy = ty - ps.pos.y;
-        const ax = SPRING_K * sdx - SPRING_DAMP * ps.vel.x;
-        const ay = SPRING_K * sdy - SPRING_DAMP * ps.vel.y;
-        ps.vel.x += ax * dt;
-        ps.vel.y += ay * dt;
-        ps.pos.x += ps.vel.x * dt;
-        ps.pos.y += ps.vel.y * dt;
+        const cosA = Math.cos(a);
+        const sinA = Math.sin(a);
+        const slotTx = ORBIT_RADIUS * cosA;
+        const slotTy = ORBIT_RADIUS * sinA;
 
-        const mdx = ps.pos.x - mobX;
-        const mdy = ps.pos.y - mobY;
-        const mdist2 = mdx * mdx + mdy * mdy;
-        if (mdist2 < minDist2) {
-          const mdist = Math.sqrt(mdist2) || 1e-4;
-          const nx = mdx / mdist;
-          const ny = mdy / mdist;
-          const overlap = minDist - mdist;
-          ps.pos.x += nx * overlap;
-          ps.pos.y += ny * overlap;
-          const vn = ps.vel.x * nx + ps.vel.y * ny;
-          if (vn < 0) {
-            ps.vel.x -= vn * nx;
-            ps.vel.y -= vn * ny;
-          }
-          ps.hits++;
-          ps.damageDealt += hitDamage;
-          ps.hp -= mobDamagePerTick;
-          if (ps.hp <= 0) {
-            ps.alive = false;
-            ps.deaths++;
-            ps.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
+        for (const seg of ps.segments) {
+          const tx = slotTx + seg.offX * cosA - seg.offY * sinA;
+          const ty = slotTy + seg.offX * sinA + seg.offY * cosA;
+
+          const sdx = tx - seg.pos.x;
+          const sdy = ty - seg.pos.y;
+          const ax = SPRING_K * sdx - SPRING_DAMP * seg.vel.x;
+          const ay = SPRING_K * sdy - SPRING_DAMP * seg.vel.y;
+          seg.vel.x += ax * dt;
+          seg.vel.y += ay * dt;
+          seg.pos.x += seg.vel.x * dt;
+          seg.pos.y += seg.vel.y * dt;
+
+          const mdx = seg.pos.x - mobX;
+          const mdy = seg.pos.y - mobY;
+          const mdist2 = mdx * mdx + mdy * mdy;
+          if (mdist2 < minDist2) {
+            const mdist = Math.sqrt(mdist2) || 1e-4;
+            const nx = mdx / mdist;
+            const ny = mdy / mdist;
+            const overlap = minDist - mdist;
+            seg.pos.x += nx * overlap;
+            seg.pos.y += ny * overlap;
+            const vn = seg.vel.x * nx + seg.vel.y * ny;
+            if (vn < 0) {
+              seg.vel.x -= vn * nx;
+              seg.vel.y -= vn * ny;
+            }
+            ps.hits++;
+            ps.damageDealt += hitDamagePerSeg;
+            ps.hp -= mobDamagePerTick;
+            if (ps.hp <= 0) {
+              ps.alive = false;
+              ps.deaths++;
+              ps.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
+              break;
+            }
           }
         }
       }
@@ -8114,23 +8150,30 @@ globalThis.RARITY_TABLE = {
       ctx.restore();
 
       const petalR = getPetalDisplayRadius();
+      const segDrawR = petalR * 0.85;
       const lerp = dpsState.paused ? 1 : Math.max(0, Math.min(1, dpsState.tickAccumulator / SIM_TICK_DT));
       for (let i = 0; i < NUM_SLOTS; i++) {
         const entry = dpsState.loadout[i];
         if (!entry) continue;
         const ps = dpsState.perSlot ? dpsState.perSlot[i] : null;
         if (!ps || !ps.alive) continue;
-        const x = ps.prevPos.x + (ps.pos.x - ps.prevPos.x) * lerp;
-        const y = ps.prevPos.y + (ps.pos.y - ps.prevPos.y) * lerp;
+        const cfg = FLOOF.state.petalConfigs[entry.idx];
+        const origSplits = cfg ? cfg.splits : undefined;
+        if (cfg && cfg.splits != null && cfg.splits > 1) cfg.splits = 1;
         try {
-          ctx.save();
-          ctx.translate(x, y);
-          ctx.scale(petalR, petalR);
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          FLOOF.drawUIPetal(entry.idx, entry.tier, ctx);
-          ctx.restore();
+          for (const seg of ps.segments) {
+            const x = seg.prevPos.x + (seg.pos.x - seg.prevPos.x) * lerp;
+            const y = seg.prevPos.y + (seg.pos.y - seg.prevPos.y) * lerp;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(segDrawR, segDrawR);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            FLOOF.drawUIPetal(entry.idx, entry.tier, ctx);
+            ctx.restore();
+          }
         } catch (_) {}
+        if (cfg) cfg.splits = origSplits;
       }
 
       ctx.restore();
