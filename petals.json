@@ -1,0 +1,7974 @@
+[
+  {
+    "name": "Basic",
+    "cooldown": 22.5,
+    "health": 10,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setDescription",
+        "args": [
+          "A simple petal. Not too strong, not too weak."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Light",
+    "cooldown": 5.625,
+    "health": 6.5,
+    "damage": 17,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            13,
+            13,
+            14,
+            14,
+            15,
+            15
+          ],
+          0,
+          true
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          0.75
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It's very light and recharges quickly, at the cost of damage."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Faster",
+    "cooldown": 14.625,
+    "health": 12,
+    "damage": 7,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          0.75
+        ]
+      },
+      {
+        "method": "setExtraRadians",
+        "args": [
+          0.01
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This one makes your petals spin faster."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Heavy",
+    "cooldown": 45,
+    "health": 100,
+    "damage": 2.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setDensity",
+        "args": [
+          6.5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A more chunky petal that hits harder but takes longer to recharge."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stinger",
+    "cooldown": 101.25,
+    "health": 1,
+    "damage": 46,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            13,
+            13,
+            14,
+            14,
+            15,
+            15
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A fragile petal that deals lots of damage."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rice",
+    "cooldown": 0,
+    "health": 0.5,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A bit weak, but recharges instantly."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rock",
+    "cooldown": 45,
+    "health": 65,
+    "damage": 53,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It's a rock, not much to say about it."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cactus",
+    "cooldown": 45,
+    "health": 18,
+    "damage": 6,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          35
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A petal that gives you extra health. Pretty magical if you ask me."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Leaf",
+    "cooldown": 22.5,
+    "health": 8,
+    "damage": 6,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setConstantHeal",
+        "args": [
+          5.5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A petal that heals you over time by the power of photosynthesis."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wing",
+    "cooldown": 28.125,
+    "health": 17,
+    "damage": 17,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          [
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.4,
+            1.6,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3
+          ]
+        ]
+      },
+      {
+        "method": "setWingMovement",
+        "args": [
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It comes and it goes."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bone",
+    "cooldown": 33.75,
+    "health": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      20
+    ],
+    "damage": 18.25,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.6
+        ]
+      },
+      {
+        "method": "setArmor",
+        "args": [
+          6
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A petal that reduces incoming damage."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dirt",
+    "cooldown": 33.75,
+    "health": 8,
+    "damage": 8,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          55
+        ]
+      },
+      {
+        "method": "setSpeedMultiplier",
+        "args": [
+          0.925
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "The extra soil slows you down a bit..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Magnolia",
+    "cooldown": 33.75,
+    "health": 8,
+    "damage": 8,
+    "calls": [
+      {
+        "method": "setConstantHeal",
+        "args": [
+          3
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          20
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A purely magical petal that heals you over time while simultaneously making you tougher."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Corn",
+    "cooldown": 112.5,
+    "health": 425,
+    "damage": 2,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.6
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It's a piece of corn. They say ants like to snack on it."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sand",
+    "cooldown": 10.125,
+    "health": 5,
+    "damage": 16,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          0.85
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            13,
+            13,
+            14,
+            14,
+            15,
+            15
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Some fine grains of sand. They recharge quickly and can pack a punch."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange",
+    "cooldown": 16.875,
+    "health": 12.5,
+    "damage": 7.5,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          3,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A bunch of oranges. They're pretty juicy."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Missile",
+    "cooldown": 22.5,
+    "health": 4,
+    "damage": 18.5,
+    "calls": [
+      {
+        "method": "setLaunchable",
+        "args": [
+          0.7,
+          45
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          [
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.4,
+            1.6,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3
+          ]
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "You can actually shoot this one!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pea.projectile",
+    "cooldown": 2250,
+    "health": 3,
+    "damage": 3,
+    "calls": [
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rose",
+    "cooldown": 33.75,
+    "health": 5,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setHealing",
+        "args": [
+          12.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Not great at combat, but it's healing properties are amazing."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yin Yang",
+    "cooldown": 22.5,
+    "health": 9,
+    "damage": 11,
+    "calls": [
+      {
+        "method": "setYinYang",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "The mysterious petal of balance."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pollen",
+    "cooldown": 16.875,
+    "health": 13,
+    "damage": 13,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          0.6
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0,
+          75
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            4,
+            4,
+            5
+          ],
+          false,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It makes you sneeze. Don't drop it!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Honey",
+    "cooldown": 11.25,
+    "health": 7.5,
+    "damage": 7.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.1
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.45,
+          5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It's sticky and will slow your enemies down."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Iris",
+    "cooldown": 22.5,
+    "health": 10,
+    "damage": 20,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            1,
+            1.2,
+            1.4,
+            1.6,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3
+          ]
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          12.5,
+          5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Packs an unexpected punch in its secret weapon: poison."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Web",
+    "cooldown": 45,
+    "health": 7,
+    "damage": 7,
+    "calls": [
+      {
+        "method": "setDescription",
+        "args": [
+          "Sticky!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Web.projectile",
+    "cooldown": 2250,
+    "health": 100000,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          30
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.334,
+          0.05
+        ]
+      },
+      {
+        "method": "setIgnoreWalls",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Third Eye",
+    "cooldown": 0,
+    "health": 0,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setExtraRange",
+        "args": [
+          0.15
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          0,
+          false
+        ]
+      },
+      {
+        "method": "setWearable",
+        "args": [
+          "THIRD_EYE"
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Through the eye of the beholder comes extra range."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pincer",
+    "cooldown": 22.5,
+    "health": 7.5,
+    "damage": 14,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          2,
+          5
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.6,
+          5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Poisonous, and it slows down your enemies. A perfect double whammy."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Beetle Egg",
+    "cooldown": 45,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Something might pop out of this!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Antennae",
+    "cooldown": 0,
+    "health": 0,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setExtraVision",
+        "args": [
+          75
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          0,
+          false
+        ]
+      },
+      {
+        "method": "setWearable",
+        "args": [
+          "ANTENNAE"
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "These feelers give you some extra vision."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Peas",
+    "cooldown": 33.75,
+    "health": 20,
+    "damage": 17.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.15
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A pod of peas. They'll explode if you're not careful."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stick",
+    "cooldown": 22.5,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          2,
+          false
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A bundle of sticks... I wonder what'll happen if you spin them around in the desert..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scorpion Missile.projectile",
+    "cooldown": 2250,
+    "health": 0.001,
+    "damage": 0.0005,
+    "calls": [
+      {
+        "method": "setPoison",
+        "args": [
+          0.0001,
+          5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dahlia",
+    "cooldown": 16.875,
+    "health": 5,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setHealing",
+        "args": [
+          3
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            7,
+            7,
+            8,
+            8
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          0.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A very consistent trickle heal."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Primrose",
+    "cooldown": 22.5,
+    "health": 12.5,
+    "damage": 7.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setHealSpit",
+        "args": [
+          67.5,
+          125,
+          10
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Said to be from a mystical covenant of witches who specialized in healing nature."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fire Spellbook",
+    "cooldown": 28.125,
+    "health": 15,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setPentagramAbility",
+        "args": [
+          90,
+          150,
+          10,
+          {
+            "damage": 5,
+            "duration": 5
+          },
+          {
+            "multiplier": 0.5,
+            "duration": 5
+          }
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A tome of ancient spells. It's said to be able to focus the power of a fallen Demon."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Deity",
+    "cooldown": 0,
+    "health": 50,
+    "damage": 50,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.15
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          3,
+          true
+        ]
+      },
+      {
+        "method": "setHealSpit",
+        "args": [
+          10,
+          1000,
+          5
+        ]
+      },
+      {
+        "method": "setConstantHeal",
+        "args": [
+          1000
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          10000
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.1,
+          10
+        ]
+      },
+      {
+        "method": "setDamageReduction",
+        "args": [
+          0.2
+        ]
+      },
+      {
+        "method": "setExtraRadians",
+        "args": [
+          0.01
+        ]
+      },
+      {
+        "method": "setExtraRange",
+        "args": [
+          1.05
+        ]
+      },
+      {
+        "method": "setExtraVision",
+        "args": [
+          5
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          5,
+          10
+        ]
+      },
+      {
+        "method": "setSpeedMultiplier",
+        "args": [
+          1.05
+        ]
+      },
+      {
+        "method": "setWingMovement",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setLightning",
+        "args": [
+          [
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10
+          ],
+          512,
+          128
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A petal that channels the power of all that came before."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lightning",
+    "cooldown": 22.5,
+    "health": 1e-15,
+    "damage": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      17
+    ],
+    "calls": [
+      {
+        "method": "setLightning",
+        "args": [
+          [
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            9,
+            9
+          ],
+          256,
+          7
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Shockingly shocking!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Powder",
+    "cooldown": 16.875,
+    "health": 3,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.65
+        ]
+      },
+      {
+        "method": "setSpeedMultiplier",
+        "args": [
+          1.03
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This special cocaine will make you go fast!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ant Egg",
+    "cooldown": 56.25,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.1
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          4,
+          false
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A petal that spawns ants. They'll help you out!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yucca",
+    "cooldown": 33.75,
+    "health": 8,
+    "damage": 15.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7
+          ],
+          "Yucca",
+          0
+        ]
+      },
+      {
+        "method": "setConstantHeal",
+        "args": [
+          7.5,
+          true
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A strange leaf that heals you but only when you're in defensive mode."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Magnet",
+    "cooldown": 45,
+    "health": 9,
+    "damage": 6,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.55
+        ]
+      },
+      {
+        "method": "setExtraPickupRange",
+        "args": [
+          125
+        ]
+      },
+      {
+        "method": "setAttractsLightning",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This petal's magnetic field will attract nearby items. Does not stack."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Amulet",
+    "cooldown": 0,
+    "health": 0,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          0,
+          false
+        ]
+      },
+      {
+        "method": "setWearable",
+        "args": [
+          "AMULET"
+        ]
+      },
+      {
+        "method": "setDamageReflection",
+        "args": [
+          0.175,
+          0.275
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "What an oddity! It's said to reflect a portion of incoming conventional damage. Does not stack."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Jelly",
+    "cooldown": 23,
+    "health": 9,
+    "damage": 7,
+    "calls": [
+      {
+        "method": "setDensity",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Super not bouncy! Does not knocks all your enemies around. Very useless."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yggdrasil",
+    "cooldown": 4000,
+    "health": null,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setDeathDefying",
+        "args": [
+          0.15,
+          0.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setPhases",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "The tree of life. If you were to die with this petal alive, you'd be revived with a portion of your health."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Glass",
+    "cooldown": 45,
+    "health": 1e-15,
+    "damage": 22,
+    "calls": [
+      {
+        "method": "setPhases",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A shard of glass that phases through enemies."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dandelion",
+    "cooldown": 22.5,
+    "health": 10,
+    "damage": 8,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          2,
+          false
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.4
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0.575,
+          35
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.65,
+          6
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A paralyzing force."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sponge",
+    "cooldown": 33.75,
+    "health": 24,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3333333333333333
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setAbsorbsDamage",
+        "args": [
+          35,
+          [
+            67.5,
+            67.5,
+            67.5,
+            90,
+            90,
+            90,
+            112.5,
+            112.5,
+            112.5,
+            135,
+            157.5,
+            180
+          ]
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It absorbs conventional damage done to your flower. If incoming damage is too great, you will suffer all of the damage the sponge has contained at once."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pearl",
+    "cooldown": 45,
+    "health": 23,
+    "damage": 6.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          2
+        ]
+      },
+      {
+        "method": "setPlaceDown",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A pearl that can be placed on the ground. You can call it back to you at any time."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shell",
+    "cooldown": 33.75,
+    "health": 13,
+    "damage": 6,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setShield",
+        "args": [
+          12.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A shell that provides extra protection through a shield."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bubble",
+    "cooldown": 11.25,
+    "health": 1e-15,
+    "damage": 1e-15,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setBoost",
+        "args": [
+          [
+            10,
+            14,
+            22,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110
+          ],
+          [
+            22,
+            20,
+            18,
+            15,
+            13,
+            11,
+            11,
+            9,
+            6,
+            4,
+            2,
+            2
+          ]
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It will boost you when you pop it."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Air",
+    "cooldown": 0,
+    "health": 0,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          0,
+          false
+        ]
+      },
+      {
+        "method": "setWearable",
+        "args": [
+          "AIR"
+        ]
+      },
+      {
+        "method": "setExtraSize",
+        "args": [
+          3
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Literally nothing at all, but it puffs you up."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Starfish",
+    "cooldown": 33.75,
+    "health": 9,
+    "damage": 11,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.4
+        ]
+      },
+      {
+        "method": "setConstantHeal",
+        "args": [
+          9,
+          false,
+          0.7
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A leg of a starfish. It will heal you quite effectively while you are under 70% health."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fang",
+    "cooldown": 28.125,
+    "health": 8,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.15
+        ]
+      },
+      {
+        "method": "setHealBack",
+        "args": [
+          [
+            0.2,
+            0.25,
+            0.3,
+            0.35,
+            0.4,
+            0.45,
+            -0.5,
+            0.55,
+            0.6,
+            0.65,
+            0.7,
+            0.75
+          ]
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "The fang of a dangerous Leech. It will heal back the damage it causes."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Goo",
+    "cooldown": 39.375,
+    "health": 10,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          2,
+          5
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.7,
+          5
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          1,
+          35
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This sticky goo isn't good for you..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Maggot Poo",
+    "cooldown": 22.5,
+    "health": 5,
+    "damage": 5.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.3
+        ]
+      },
+      {
+        "method": "setDamageReflection",
+        "args": [
+          0.05
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0,
+          75
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A steaming pile of shi- I mean, poo."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lightbulb",
+    "cooldown": 22.5,
+    "health": 10,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.4
+        ]
+      },
+      {
+        "method": "setAttractsAggro",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setLighting",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Mobs will prioritize your shiny bulb when in use. The priority increases with each rarity, and stacks with itself."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Battery",
+    "cooldown": 50.625,
+    "health": 1e-15,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setPhases",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.34
+        ]
+      },
+      {
+        "method": "setLightning",
+        "args": [
+          4,
+          256,
+          5,
+          [
+            2,
+            2,
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7
+          ],
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A battery that can release electric charges when its parent is hit."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dust",
+    "cooldown": 16.875,
+    "health": 6,
+    "damage": 7.5,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          3,
+          true
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0.7,
+          55
+        ]
+      },
+      {
+        "method": "setDensity",
+        "args": [
+          1.00005
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A cloud of dust that can be launched at enemies."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Armor",
+    "cooldown": 0,
+    "health": 0,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setMulti",
+        "args": [
+          0,
+          false
+        ]
+      },
+      {
+        "method": "setWearable",
+        "args": [
+          "ARMOR"
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          -10
+        ]
+      },
+      {
+        "method": "setDamageReduction",
+        "args": [
+          0.25
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This petal greatly protects you, but at a cost..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wasp Missile.projectile",
+    "cooldown": 2250,
+    "health": 4,
+    "damage": 4,
+    "calls": [
+      {
+        "method": "setPoison",
+        "args": [
+          2,
+          8
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shrub",
+    "cooldown": 33.75,
+    "health": 15,
+    "damage": 6,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          3,
+          2
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Extra HP with a bonus: poison!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "projectile.grape",
+    "cooldown": 2250,
+    "health": 1,
+    "damage": 4,
+    "calls": [
+      {
+        "method": "setPoison",
+        "args": [
+          0.75,
+          6
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Grapes",
+    "cooldown": 33.75,
+    "health": 15,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.15
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          7.5,
+          5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "With an added bonus: Poison!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lantern",
+    "cooldown": 45,
+    "health": 5,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This fragile lantern shines so bright..."
+        ]
+      },
+      {
+        "method": "setLighting",
+        "args": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "name": "web.player.launched",
+    "cooldown": 2250,
+    "health": 100000,
+    "damage": 0,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          30
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.334,
+          0.05
+        ]
+      },
+      {
+        "method": "setIgnoreWalls",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Branch",
+    "cooldown": 67.5,
+    "health": 10,
+    "damage": 10,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          2,
+          false
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A fragile branch from the Wilt."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Leech Egg",
+    "cooldown": 45,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Summons leeches to help protect you!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hornet Egg",
+    "cooldown": 45,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          2,
+          false
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Hey wait a minute... This isn't a Beetle Egg!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Candy",
+    "cooldown": 22.5,
+    "health": 5,
+    "damage": 5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          0.9
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          5,
+          true
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Ooh, tasty!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Claw",
+    "cooldown": 45,
+    "health": 0.25,
+    "damage": 8,
+    "calls": [
+      {
+        "method": "setExtraDamage",
+        "args": [
+          0.75,
+          1,
+          7.5
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Sharp against the strong, weak against the weak."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bullet.projectile",
+    "cooldown": 1000,
+    "health": 12,
+    "damage": 2,
+    "calls": [
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Square Egg",
+    "cooldown": 45,
+    "health": 50,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.2
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This isn't from this world..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Triangle Egg",
+    "cooldown": 67.5,
+    "health": 100,
+    "damage": 2,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This isn't from this world..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pentagon Egg",
+    "cooldown": 90,
+    "health": 200,
+    "damage": 4,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.8
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This isn't from this world..."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dice",
+    "cooldown": 22.5,
+    "health": 5,
+    "damage": 17.5,
+    "calls": [
+      {
+        "method": "setDiceAbility",
+        "args": [
+          0.05,
+          20
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  4,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.275,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.4,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.275,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0.4,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.275,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  -0.4,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.275,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  -0.4,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#FFFFFF",
+                  0.275,
+                  0.2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Has a 5% chance of dealing 20x damage. Criticals will only apply if the base dice damage is higher than the mob armor. Suggested by: Climbo"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fire Sand",
+    "cooldown": 10.125,
+    "health": 5,
+    "damage": 48,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          0.575,
+          [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            13,
+            13,
+            14,
+            14,
+            15,
+            15
+          ],
+          "Sand",
+          0
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          0.85
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            13,
+            13,
+            14,
+            14,
+            15,
+            15
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  7,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e86d48",
+                  0.445,
+                  0.2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Some fine grains of sand on fire. They deal 3x damage than normal sand. Suggested by: Climbo"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cinderbrick",
+    "cooldown": 100.125,
+    "health": 5,
+    "damage": 128,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            8,
+            8
+          ],
+          "Cinderbrick",
+          0
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.05
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            8,
+            8
+          ],
+          1,
+          true
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  1,
+                  0.4,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#c9b48c",
+                  0.225,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  0.5,
+                  0.4,
+                  3.141592653589793
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#b4a27e"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A really hard piece of rock. Suggested by: Amditorium"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rare Cactus",
+    "cooldown": 25,
+    "health": 40,
+    "damage": 40,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          1,
+          "Cactus",
+          0
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setExtraHealth",
+        "args": [
+          175
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  9,
+                  1,
+                  3,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e6d450",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  8,
+                  0.525,
+                  3,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#ede084",
+                  0.15,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  0.3
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#f8f4d3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "This shiny cactus will give you 5x extra health than normal cactus and his sharp thorns will deal massive damage. Suggested by: Mega nob"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scorpion Egg",
+    "cooldown": 45,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          1,
+          "Egg",
+          0
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "ellipse",
+                  0,
+                  0,
+                  0.775,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#c69a2d",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "ellipse",
+                  0,
+                  0,
+                  0.4,
+                  0.6,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#b28a28"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Where did you get this? Suggested by: climbo"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Jellyfish Egg",
+    "cooldown": 45,
+    "health": 25,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          1,
+          "Egg",
+          0
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setHuddles",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "ellipse",
+                  0,
+                  0,
+                  0.775,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.4
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#ffffff"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.6
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#ffffff",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  -0.175,
+                  0.4,
+                  0.275
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.3,
+                  0,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  -0.25,
+                  -0.25,
+                  0.175
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.125,
+                  -0.55,
+                  0.13
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#ffffff"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "May be op idk.",
+            "Dude how"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ruby",
+    "cooldown": 22.5,
+    "health": 5,
+    "damage": 17.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          10000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          5,
+          7
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          6,
+          7
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          7,
+          7
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          8,
+          7
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          9,
+          8
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          10,
+          8
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          8
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          11000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          8,
+          8
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          9,
+          8
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          10,
+          8
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          11,
+          9
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          12,
+          9
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          13,
+          9
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          9
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          20000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          10,
+          9
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          11,
+          9
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          12,
+          9
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          13,
+          9
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          14,
+          10
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          15,
+          10
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          40000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          13,
+          10
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          14,
+          10
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          15,
+          11
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          16,
+          11
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          17,
+          11
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          11
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          60000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          14,
+          11
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          15,
+          11
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          16,
+          12
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          17,
+          12
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          18,
+          12
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          70000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          15,
+          12
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          16,
+          12
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          17,
+          12
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          18,
+          13
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          19,
+          13
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          20,
+          13
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          80000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          17,
+          13
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          18,
+          13
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          19,
+          14
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          20,
+          14
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          21,
+          14
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          90000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          19,
+          14
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          20,
+          14
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          21,
+          15
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          22,
+          15
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          23,
+          15
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setTierRubyAbility",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "SummonLifetime",
+        "args": [
+          100000
+        ]
+      },
+      {
+        "method": "MinimumSummonRarity",
+        "args": [
+          21,
+          15
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          22,
+          15
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          23,
+          16
+        ]
+      },
+      {
+        "method": "SummonRarity",
+        "args": [
+          24,
+          16
+        ]
+      },
+      {
+        "method": "MaximumSummonRarity",
+        "args": [
+          25,
+          16
+        ]
+      },
+      {
+        "method": "endTierRubyAbility",
+        "args": []
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  45
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  3,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e85a5a",
+                  0.3,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  3,
+                  0.3,
+                  1.1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#f3acac"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Mythic dont get converted to summons at all.\nMobs below Omega get converted into Super summons.\nMobs above Ancient get converted into Ancient summons.\nSummons Lifetime: 10s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Ancient dont get converted to summons at all.\nMobs below Unique get converted into Ancient summons.\nMobs above Eternal get converted into Omega summons.\nSummons Lifetime: 11s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Eternal dont get converted to summons at all.\nMobs below Millom get converted into Omega summons.\nMobs above Galaxium get converted into Eternal summons.\nSummons Lifetime: 20s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Galaxium dont get converted to summons at all.\nMobs below Fictional get converted into Eternal summons.\nMobs above Millom get converted into Unique summons.\nSummons Lifetime: 40s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Millom dont get converted to summons at all.\nMobs below Transcestrial get converted into Unique summons.\nMobs above Fictional get converted into Hyper summons.\nSummons Lifetime: 60s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Fictional dont get converted to summons at all.\nMobs below Absiorcadinary get converted into Hyper summons.\nMobs above Chaos get converted into Galaxium summons.\nSummons Lifetime: 70s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Chaos dont get converted to summons at all.\nMobs below Absolute Fictional get converted into Galaxium summons.\nMobs above Absiorcadinary get converted into Millom summons.\nSummons Lifetime: 80s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Absolute Fictional dont get converted to summons at all.\nMobs below Hyperfixation get converted into Millom summons.\nMobs above Nullified get converted into Fictional summons.\nSummons Lifetime: 90s",
+            "Turns everything you kill into summons with the power of friendship. Check /info\nMobs below Hyperfixation dont get converted to summons at all.\nMobs below Alpha get converted into Fictional summons.\nMobs above Atlantical get converted into Transcestrial summons.\nSummons Lifetime: 100s"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Emerald",
+    "cooldown": 675,
+    "health": 1,
+    "damage": 0.01,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setEmeraldAbility",
+        "args": [
+          30000,
+          10
+        ]
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          5
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          8
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          9
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          9
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          17
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          11
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          19
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          20
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          18
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          22
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          20
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          23
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setTierEmeraldAbility",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "MinimumMobRarity",
+        "args": [
+          23
+        ]
+      },
+      {
+        "method": "MaximumMobRarity",
+        "args": [
+          26
+        ]
+      },
+      {
+        "method": "endTierEmeraldAbility",
+        "args": []
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  5,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#76de82",
+                  0.3,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  0.4,
+                  10,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#baeec0"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Mythic\nMaximum mob rarity (capped): Eternal",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Super\nMaximum mob rarity (capped): Hyper",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Omega\nMaximum mob rarity (capped): Fictional",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Hyper\nMaximum mob rarity (capped): Chaos",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Galaxium\nMaximum mob rarity (capped): Absiorcadinary",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Fictional\nMaximum mob rarity (capped): Nullified",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Absiorcadinary\nMaximum mob rarity (capped): Atlantical",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Nullified\nMaximum mob rarity (capped): Alpha",
+            "Dupes mobs, pretty magical if you ask me. Check /info\nMinimum mob rarity required: Alpha\nMaximum mob rarity (capped): Improbable"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Diamond",
+    "cooldown": 60,
+    "health": 1,
+    "damage": 9,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  4,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#78cdff",
+                  0.3,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  4,
+                  0.4,
+                  7.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bbe6ff"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 5%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 8%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 12%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 15%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 18%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 21%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 24%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 27%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: 30%",
+            "Reduces incoming damage. Note: Does not reduce poison or lightning damage. Check /info\nDamage Reduction: undefined%"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Coin",
+    "cooldown": 30,
+    "health": 5,
+    "damage": 16.85,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#C69B2E"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#F5bF39",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "arc",
+                  0,
+                  0,
+                  0.4,
+                  0.7853981633974483,
+                  5.654866776461628
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#FFE783",
+                  0.25,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "line",
+                  0.05,
+                  0.4,
+                  -0.1,
+                  0.6
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "line",
+                  -0.05,
+                  -0.4,
+                  0.1,
+                  -0.6
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#FFE783",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Coin."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Blood Light",
+    "cooldown": 10.155,
+    "health": 20,
+    "damage": 52,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          0.6,
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            15
+          ],
+          "Light",
+          0
+        ]
+      },
+      {
+        "method": "setBloodLight",
+        "args": [
+          0.01
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            6,
+            7,
+            7,
+            8,
+            8,
+            9,
+            9,
+            10,
+            10,
+            11,
+            11,
+            12,
+            12,
+            15
+          ],
+          0,
+          true
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#a82f2f",
+                  0.4,
+                  0.2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 0.05",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 0.31",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 1.04",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 3.33",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 8.32",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 33.28",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 249.6",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 1.25k",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 10.48k",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 53.91k",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 431.31k",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 2.59m",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 38.82m",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 139.74m",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 1.4b",
+            "Deals high damage but with the cost of dealing damage to the player. Check /petalinfo [rarity] bloodlight\nSelf Damage: 8.38b"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fire Missile",
+    "cooldown": 15.5,
+    "health": 6,
+    "damage": 150.5,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          1,
+          "Missile",
+          -45
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0.7,
+          45
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          [
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.4,
+            1.6,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3
+          ]
+        ]
+      },
+      {
+        "method": "setPoison",
+        "args": [
+          41.5,
+          5
+        ]
+      },
+      {
+        "method": "setMulti",
+        "args": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            7,
+            7,
+            7,
+            8,
+            8
+          ],
+          0,
+          true
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0.8,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  -0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#862100",
+                  0.6,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "You can actually shoot this one and now with an extra ingredient: poison!"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shovel",
+    "cooldown": 30,
+    "health": 1,
+    "damage": 1,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          0.8,
+          1,
+          "Shovel",
+          -45
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "line",
+                  -0.65,
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#614c39",
+                  0.225,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0.6,
+                  0.65
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.6,
+                  -0.65
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  1.35,
+                  -0.55
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  1.7,
+                  -0.15
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  1.7,
+                  0.15
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  1.35,
+                  0.55
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.6,
+                  0.65
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#c7ccd1",
+                  0.225,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0.6,
+                  -0.1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  1.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.6,
+                  0.1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#9fa3a7"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  -1.2,
+                  0.35
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -1,
+                  0.35
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  -0.35,
+                  0,
+                  -1,
+                  -0.35
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -1.2,
+                  -0.35
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#4a3f35",
+                  0.252,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Disables colliding with mobs for 5s, cooldown of 70s after using. Note: Renders kind of broken and buggy but main logic actually works."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Blood Leaf",
+    "cooldown": 12.5,
+    "health": 18,
+    "damage": 35.5,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          2
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          0,
+          0
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          1,
+          0
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          2,
+          0
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          3,
+          0
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          4,
+          1
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          5,
+          2
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          6,
+          3
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          7,
+          5
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          8,
+          7
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          9,
+          9
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          10,
+          10
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          11,
+          11
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          12,
+          13
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          13,
+          14
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          14,
+          16
+        ]
+      },
+      {
+        "method": "setTierMinimumMobRarityForBloodLeafDamage",
+        "args": [
+          15,
+          18
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  -0.531,
+                  0.801
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.634,
+                  0.534
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.688,
+                  0.286
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.692,
+                  0.057
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.647,
+                  -0.153
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.552,
+                  -0.343
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.408,
+                  -0.514
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.214,
+                  -0.665
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.03,
+                  -0.798
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.323,
+                  -0.911
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.666,
+                  -1.005
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.713,
+                  -0.653
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.723,
+                  -0.338
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.696,
+                  -0.062
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.586,
+                  0.28
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.393,
+                  0.537
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.116,
+                  0.707
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.245,
+                  0.792
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.531,
+                  0.801
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e03f3f",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  -0.558,
+                  0.842
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.727,
+                  1.096
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#e03f3f",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  -0.272,
+                  0.41
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.221,
+                  0.302
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.167,
+                  0.198
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.11,
+                  0.095
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.051,
+                  -0.005
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.012,
+                  -0.102
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.077,
+                  -0.197
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.145,
+                  -0.289
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.215,
+                  -0.379
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.289,
+                  -0.466
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  0.365,
+                  -0.551
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#e03f3f",
+                  0.2,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Each kill with this petal equipped gives extra damage bonus, resets when dying. Check /petalinfo [rarity] bloodleaf"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shiny Wing",
+    "cooldown": 7.125,
+    "health": 22,
+    "damage": 34,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          [
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.3,
+            1.4,
+            1.6,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3
+          ]
+        ]
+      },
+      {
+        "method": "setWingMovement",
+        "args": [
+          true
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          2.4
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  45
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "arc",
+                  0,
+                  0,
+                  1,
+                  -0.63,
+                  3.7699111843077517
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0,
+                  0.6,
+                  0.77,
+                  -0.63
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#fff991",
+                  0.2,
+                  0.2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It comes and it goes, bonus damage depending on how fast its going, check /petalinfo [rarity] shinywing"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Uranium",
+    "cooldown": 225,
+    "health": 1,
+    "damage": 9,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.5
+        ]
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          7000,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          5
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          8
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          7500,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          9
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          8000,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          8
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          8500,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          18
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          11
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          9000,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          20
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          9500,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          22
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          10000,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          16
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          23
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          10500,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          18
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          25
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setTierUraniumAbility",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "setUraniumAbility",
+        "args": [
+          11000,
+          1000
+        ]
+      },
+      {
+        "method": "setMinimumMobForUraniumAbility",
+        "args": [
+          19
+        ]
+      },
+      {
+        "method": "setMaximumMobForUraniumAbility",
+        "args": [
+          27
+        ]
+      },
+      {
+        "method": "setEndTierUraniumAbility",
+        "args": []
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  6,
+                  0.85,
+                  9.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#d6fc97"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#a6cf65",
+                  0.35,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Freezes mobs and stops them from firing projectiles for an amount of time. Check /info"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Clover",
+    "cooldown": 52,
+    "health": 11,
+    "damage": 11,
+    "calls": [
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          5
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.001
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          6
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.005
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          7
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.01
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          8
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0125
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          9
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.015
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          10
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0175
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          11
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.02
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          12
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0225
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          13
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.025
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          14
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0275
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          15
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.03
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          16
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0325
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          17
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.035
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          18
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0375
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          19
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.04
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          20
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0425
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          21
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.045
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          22
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0475
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          23
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.05
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          24
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0525
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          25
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.055
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          26
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.0575
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          27
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.06
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          28
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.08
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setTierCloverAbility",
+        "args": [
+          29
+        ]
+      },
+      {
+        "method": "setCloverChance",
+        "args": [
+          0.1
+        ]
+      },
+      {
+        "method": "endTierCloverAbility",
+        "args": []
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  15
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  -0.56,
+                  1,
+                  -0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  1.105,
+                  0,
+                  1,
+                  0.225
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "quadraticCurveTo",
+                  0.825,
+                  0.56,
+                  0,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  60
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#3AB54A",
+                  0.225,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          [
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "How did you get this?",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 0.1%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 0.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 1%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 1.25%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 1.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 1.75%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 2%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 2.25%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 2.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 2.75%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 3%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 3.25%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 3.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 3.75%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 4%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 4.25%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 4.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 4.75%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 5.25%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 5.5%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 5.75%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 6%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 8%",
+            "Has a chance of duping when collecting drops if this petal is on main slots. Does not stack. Check /petalinfo [rarity] clover\nDupe chance: 10%"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rock.projectile",
+    "cooldown": 2250,
+    "health": 0.001,
+    "damage": 0.0005,
+    "calls": [
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  5,
+                  1,
+                  3.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#707070"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#525252",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pomegranate",
+    "cooldown": 10.125,
+    "health": 6,
+    "damage": 44,
+    "calls": [
+      {
+        "method": "setIcon",
+        "args": [
+          0.85,
+          1,
+          "Pomegranate",
+          -45
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.25
+        ]
+      },
+      {
+        "method": "setPomegranate",
+        "args": [
+          0.005
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.75,
+                  0,
+                  0.75
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e52669",
+                  0.25,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0.75,
+                  0.75
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e52669",
+                  0.25,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  -0.75,
+                  0,
+                  0.75
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e52669",
+                  0.25,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  -0.75,
+                  0.75
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#e52669",
+                  0.25,
+                  0.2
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "A deadly 4 in 1 deal. Check /petalinfo [rarity] pomegranate"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "projectile.pomegranate",
+    "cooldown": 2250,
+    "health": 6,
+    "damage": 44,
+    "calls": [
+      {
+        "method": "setPomegranate",
+        "args": [
+          0.005
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  0.8
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#cf235f"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0,
+                  0,
+                  0.5
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#ff2b75"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ӇЄҲƛƓƠƝ",
+    "cooldown": 225,
+    "health": 6,
+    "damage": 44,
+    "calls": [
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  6,
+                  1.1,
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#c73626"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#853d35",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.5
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "polygon",
+                  6,
+                  1.2,
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#c73626"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#853d35",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Trophy petal."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fiberglass",
+    "cooldown": 25,
+    "health": 6,
+    "damage": 28,
+    "calls": [
+      {
+        "method": "setPhases",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  7,
+                  1,
+                  -1,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#a7b9d1",
+                  0.225,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  7,
+                  0.5,
+                  -1,
+                  3.141592653589793
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  20
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.4,
+                  0,
+                  0.275
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  125
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.4,
+                  0,
+                  0.25
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "rotate",
+                  125
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "circle",
+                  0.4,
+                  0,
+                  0.3
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  12,
+                  0.6,
+                  7,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Fiber?"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fiberglass.projectile",
+    "cooldown": 25,
+    "health": 6,
+    "damage": 28,
+    "calls": [
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  7,
+                  1,
+                  0.8,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#a7b9d1",
+                  0.225,
+                  0.2
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  10,
+                  0.6,
+                  5,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#bdcadc"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  10,
+                  0.25,
+                  -5,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#a7b9d1"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Resin",
+    "cooldown": 185,
+    "health": 6,
+    "damage": 30,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.1
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.45,
+          5
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.45
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  1,
+                  -1.3,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#fcebff"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#fcebff",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.6
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  0.45,
+                  -1.6,
+                  3.141592653589793
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#fcebff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "It's sticky and will slow your enemies down. Each resin projectile collision with a mob has a 0.01% chance of temporary pacifying for 5 minutes that mob."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Resin.projectile",
+    "cooldown": 2250,
+    "health": 100000,
+    "damage": 15,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          35
+        ]
+      },
+      {
+        "method": "setEnemySpeedMultiplier",
+        "args": [
+          0.334,
+          0.05
+        ]
+      },
+      {
+        "method": "setIgnoreWalls",
+        "args": [
+          1
+        ]
+      },
+      {
+        "method": "setPacifyAbility",
+        "args": [
+          0.0001
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.45
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  1,
+                  -1.3,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#fcebff"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  1
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "stroke",
+                  "#fcebff",
+                  0.2,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "opacity",
+                  0.6
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "dipPolygon",
+                  5,
+                  0.45,
+                  -1.6,
+                  3.141592653589793
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "fill",
+                  "#fcebff"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Thorn",
+    "cooldown": 25,
+    "health": 80,
+    "damage": 60,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.1
+        ]
+      },
+      {
+        "method": "setIcon",
+        "args": [
+          1,
+          1,
+          "Thorn",
+          -45
+        ]
+      },
+      {
+        "method": "setLaunchable",
+        "args": [
+          0.7,
+          45
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.35
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0.8,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  -0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#91775a",
+                  0.6,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "Spiky."
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Thorn.projectile",
+    "cooldown": 25,
+    "health": 6,
+    "damage": 0.005,
+    "calls": [
+      {
+        "method": "setSize",
+        "args": [
+          1.1
+        ]
+      },
+      {
+        "method": "setSize",
+        "args": [
+          1.35
+        ]
+      },
+      {
+        "method": "setDrawing",
+        "args": [
+          {
+            "_kind": "drawing",
+            "calls": [
+              {
+                "method": "addAction",
+                "args": [
+                  "beginPath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "moveTo",
+                  0.8,
+                  0
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  -0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "lineTo",
+                  -0.7200000000000001,
+                  0.5336000000000001
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "closePath"
+                ]
+              },
+              {
+                "method": "addAction",
+                "args": [
+                  "paint",
+                  "#91775a",
+                  0.6,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "method": "setDescription",
+        "args": [
+          "[object null object]"
+        ]
+      }
+    ]
+  }
+]

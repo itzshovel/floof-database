@@ -1,0 +1,106 @@
+# Floof petal data - extracted from message (4).txt
+# 101 petals
+
+idx   name                              cooldown    health          damage        
+----------------------------------------------------------------------------------
+0     Basic                             22.5        10              10            
+1     Light                             5.625       6.5             17            
+2     Faster                            14.625      12              7             
+3     Heavy                             45          100             2.5           
+4     Stinger                           101.25      1               46            
+5     Rice                              0           0.5             5             
+6     Rock                              45          65              53            
+7     Cactus                            45          18              6             
+8     Leaf                              22.5        8               6             
+9     Wing                              28.125      17              17            
+10    Bone                              33.75       [10,10,10,10,~  18.25         
+11    Dirt                              33.75       8               8             
+12    Magnolia                          33.75       8               8             
+13    Corn                              112.5       425             2             
+14    Sand                              10.125      5               16            
+15    Orange                            16.875      12.5            7.5           
+16    Missile                           22.5        4               18.5          
+17    Pea.projectile                    2250        3               3             
+18    Rose                              33.75       5               5             
+19    Yin Yang                          22.5        9               11            
+20    Pollen                            16.875      13              13            
+21    Honey                             11.25       7.5             7.5           
+22    Iris                              22.5        10              20            
+23    Web                               45          7               7             
+24    Web.projectile                    2250        100000          0             
+25    Third Eye                         0           0               0             
+26    Pincer                            22.5        7.5             14            
+27    Beetle Egg                        45          25              1             
+28    Antennae                          0           0               0             
+29    Peas                              33.75       20              17.5          
+30    Stick                             22.5        25              1             
+31    Scorpion Missile.projectile       2250        0.001           0.0005        
+32    Dahlia                            16.875      5               5             
+33    Primrose                          22.5        12.5            7.5           
+34    Fire Spellbook                    28.125      15              5             
+35    Deity                             0           50              50            
+36    Lightning                         22.5        1e-15           [5,5,5,5,5,5,~
+37    Powder                            16.875      3               5             
+38    Ant Egg                           56.25       25              1             
+39    Yucca                             33.75       8               15.5          
+40    Magnet                            45          9               6             
+41    Amulet                            0           0               0             
+42    Jelly                             23          9               7             
+43    Yggdrasil                         4000        Infinity        0             
+44    Glass                             45          1e-15           22            
+45    Dandelion                         22.5        10              8             
+46    Sponge                            33.75       24              0             
+47    Pearl                             45          23              6.5           
+48    Shell                             33.75       13              6             
+49    Bubble                            11.25       1e-15           1e-15         
+50    Air                               0           0               0             
+51    Starfish                          33.75       9               11            
+52    Fang                              28.125      8               10            
+53    Goo                               39.375      10              10            
+54    Maggot Poo                        22.5        5               5.5           
+55    Lightbulb                         22.5        10              10            
+56    Battery                           50.625      1e-15           0             
+57    Dust                              16.875      6               7.5           
+58    Armor                             0           0               0             
+59    Wasp Missile.projectile           2250        4               4             
+60    Shrub                             33.75       15              6             
+61    projectile.grape                  2250        1               4             
+62    Grapes                            33.75       15              10            
+63    Lantern                           45          5               5             
+64    web.player.launched               2250        100000          0             
+65    Branch                            67.5        10              10            
+66    Leech Egg                         45          25              1             
+67    Hornet Egg                        45          25              1             
+68    Candy                             22.5        5               5             
+69    Claw                              45          0.25            8             
+70    Bullet.projectile                 1000        12              2             
+71    Square Egg                        45          50              1             
+72    Triangle Egg                      67.5        100             2             
+73    Pentagon Egg                      90          200             4             
+74    Dice                              22.5        5               17.5          
+75    Fire Sand                         10.125      5               48            
+76    Cinderbrick                       100.125     5               128           
+77    Rare Cactus                       25          40              40            
+78    Scorpion Egg                      45          25              1             
+79    Jellyfish Egg                     45          25              1             
+80    Ruby                              22.5        5               17.5          
+81    Emerald                           675         1               0.01          
+82    Diamond                           60          1               9             
+83    Coin                              30          5               16.85         
+84    Blood Light                       10.155      20              52            
+85    Fire Missile                      15.5        6               150.5         
+86    Shovel                            30          1               1             
+87    Blood Leaf                        12.5        18              35.5          
+88    Shiny Wing                        7.125       22              34            
+89    Uranium                           225         1               9             
+90    Clover                            52          11              11            
+91    Rock.projectile                   2250        0.001           0.0005        
+92    Pomegranate                       10.125      6               44            
+93    projectile.pomegranate            2250        6               44            
+94    ӇЄҲƛƓƠƝ                           225         6               44            
+95    Fiberglass                        25          6               28            
+96    Fiberglass.projectile             25          6               28            
+97    Resin                             185         6               30            
+98    Resin.projectile                  2250        100000          15            
+99    Thorn                             25          80              60            
+100   Thorn.projectile                  25          6               0.005         
