@@ -16,4 +16,4 @@ A self-contained, single-page Floof petal & mob reference plus a DPS calculator.
 
 ## Credits
 
-Credits: @shiny_frog2020, @itzshovelalt
+Credits: @Tiger200830, @Itzshovel
