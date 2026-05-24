@@ -8058,15 +8058,13 @@ globalThis.RARITY_TABLE = {
 
       ctx.strokeStyle = 'rgba(255,80,80,0.55)';
       ctx.lineWidth = 1.4 / scale;
-      ctx.setLineDash([4 / scale, 4 / scale]);
       ctx.beginPath();
       ctx.arc(mobX, 0, mobR, 0, Math.PI * 2);
       ctx.stroke();
-      ctx.setLineDash([]);
 
       ctx.save();
       ctx.translate(mobX, 0);
-      const mobScale = mobR / 3;
+      const mobScale = (mobR / 3) * 2;
       ctx.scale(mobScale, mobScale);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -8077,19 +8075,12 @@ globalThis.RARITY_TABLE = {
       const renderAngle = dpsState.angle + (dpsState.paused ? 0 : dpsState.lastAngularVel * dpsState.tickAccumulator);
       for (let i = 0; i < NUM_SLOTS; i++) {
         const entry = dpsState.loadout[i];
+        if (!entry) continue;
         const ps = dpsState.perSlot ? dpsState.perSlot[i] : null;
+        if (ps && !ps.alive) continue;
         const angle = renderAngle + (i / NUM_SLOTS) * Math.PI * 2;
         const x = ORBIT_RADIUS * Math.cos(angle);
         const y = ORBIT_RADIUS * Math.sin(angle);
-        if (!entry) {
-          ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-          ctx.lineWidth = 1.2 / scale;
-          ctx.beginPath();
-          ctx.arc(x, y, petalR * 0.5, 0, Math.PI * 2);
-          ctx.stroke();
-          continue;
-        }
-        if (ps && !ps.alive) continue;
         try {
           ctx.save();
           ctx.translate(x, y);
