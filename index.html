@@ -7100,8 +7100,8 @@ globalThis.RARITY_TABLE = {
         <div class="dps-section">
           <h3>Simulation</h3>
           <div class="sim-buttons">
-            <button id="dpsRun">Run sim (10s)</button>
-            <button id="dpsToggle">Pause</button>
+            <button id="dpsRun">Restart</button>
+            <button id="dpsToggle">Start</button>
           </div>
           <div class="sim-canvas-wrap">
             <canvas class="sim-canvas" id="dpsSim"></canvas>
@@ -7111,6 +7111,8 @@ globalThis.RARITY_TABLE = {
             <tbody></tbody>
           </table>
           <div class="dps-total"><span>Total DPS</span><span class="v" id="dpsTotal">—</span></div>
+          <div class="dps-total"><span>Mob HP</span><span class="v" id="dpsMobHp">100%</span></div>
+          <div class="dps-total"><span>Mob deaths</span><span class="v" id="dpsMobDeaths">0</span></div>
         </div>
       </div>
     </section>
@@ -7777,7 +7779,7 @@ globalThis.RARITY_TABLE = {
       mobIdx: 0,
       mobTier: Math.min(5, mobRarities[mobRarities.length - 1] || 0),
       loadout: new Array(NUM_SLOTS).fill(null),
-      paused: false,
+      paused: true,
       lastFrameT: null,
       angle: 0,
       simT: 0,
@@ -7787,14 +7789,15 @@ globalThis.RARITY_TABLE = {
       perSlot: null,
       animId: null,
       lastStatsT: 0,
+      mobHp: 0,
+      mobMaxHp: 0,
+      mobArmor: 0,
+      mobDeaths: 0,
     };
     window.__DPS__ = dpsState;
 
     function makePerSlotState() {
       const out = new Array(NUM_SLOTS).fill(null).map(() => ({
-        alive: true,
-        hp: 0,
-        reloadUntil: 0,
         damageDealt: 0,
         hits: 0,
         deaths: 0,
@@ -7803,9 +7806,19 @@ globalThis.RARITY_TABLE = {
       return out;
     }
 
-    function segmentLocalOffsets(N) {
+    const MISSILE_LIKE_IDX = new Set([16, 85, 99]);
+    const FIRE_MISSILE_IDX = 85;
+
+    function segmentLocalOffsets(N, petalIdx) {
       const out = [];
       if (N <= 1) { out.push({ x: 0, y: 0 }); return out; }
+      if (petalIdx === FIRE_MISSILE_IDX) {
+        const spacing = 14;
+        for (let j = 0; j < N; j++) {
+          out.push({ x: 0, y: (j - (N - 1) / 2) * spacing });
+        }
+        return out;
+      }
       const clusterR = Math.max(6, 3 + 1.5 * N);
       for (let j = 0; j < N; j++) {
         const a = (j / N) * Math.PI * 2;
@@ -7814,9 +7827,9 @@ globalThis.RARITY_TABLE = {
       return out;
     }
 
-    function initSlotPhysics(i, ps, segCount) {
+    function initSlotPhysics(i, ps, segCount, petalIdx, segMaxHp) {
       const N = Math.max(1, segCount | 0);
-      const offsets = segmentLocalOffsets(N);
+      const offsets = segmentLocalOffsets(N, petalIdx);
       const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
       const cosA = Math.cos(a);
       const sinA = Math.sin(a);
@@ -7833,8 +7846,28 @@ globalThis.RARITY_TABLE = {
           pos: { x: wx, y: wy },
           prevPos: { x: wx, y: wy },
           vel: { x: 0, y: 0 },
+          alive: true,
+          hp: segMaxHp,
+          maxHp: segMaxHp,
+          reloadUntil: 0,
         });
       }
+    }
+
+    function respawnSegmentAt(seg, slotIdx, segMaxHp) {
+      const a = dpsState.angle + (slotIdx / NUM_SLOTS) * Math.PI * 2;
+      const cosA = Math.cos(a);
+      const sinA = Math.sin(a);
+      const slotTx = ORBIT_RADIUS * cosA;
+      const slotTy = ORBIT_RADIUS * sinA;
+      const wx = slotTx + seg.offX * cosA - seg.offY * sinA;
+      const wy = slotTy + seg.offX * sinA + seg.offY * cosA;
+      seg.pos.x = wx; seg.pos.y = wy;
+      seg.prevPos.x = wx; seg.prevPos.y = wy;
+      seg.vel.x = 0; seg.vel.y = 0;
+      seg.alive = true;
+      seg.hp = segMaxHp;
+      seg.maxHp = segMaxHp;
     }
 
     function bootDps() {
@@ -7939,7 +7972,7 @@ globalThis.RARITY_TABLE = {
       });
       document.getElementById('dpsToggle').addEventListener('click', () => {
         dpsState.paused = !dpsState.paused;
-        document.getElementById('dpsToggle').textContent = dpsState.paused ? 'Resume' : 'Pause';
+        document.getElementById('dpsToggle').textContent = dpsState.paused ? 'Start' : 'Stop';
         if (!dpsState.paused) { dpsState.lastFrameT = performance.now(); startDpsLoop(); }
       });
     }
@@ -7951,16 +7984,24 @@ globalThis.RARITY_TABLE = {
       dpsState.tickCount = 0;
       dpsState.lastFrameT = performance.now();
       dpsState.perSlot = makePerSlotState();
+      const mobStats = RARITY_TABLE[dpsState.mobTier] || {};
+      dpsState.mobMaxHp = Number(mobStats.health) || 0;
+      dpsState.mobHp = dpsState.mobMaxHp;
+      dpsState.mobArmor = Number(mobStats.armor) || 0;
+      dpsState.mobDeaths = 0;
       for (let i = 0; i < NUM_SLOTS; i++) {
         const ps = dpsState.perSlot[i];
         const entry = dpsState.loadout[i];
         const segCount = entry ? getSegmentCount(entry.idx, entry.tier) : 1;
-        initSlotPhysics(i, ps, segCount);
-        if (!entry) continue;
-        const cfg = FLOOF.state.petalConfigs[entry.idx];
-        const tier = cfg && cfg.tiers[entry.tier];
-        const hp = tier && Number.isFinite(tier.health) ? tier.health : 0;
-        ps.hp = hp;
+        let segMaxHp = 0;
+        if (entry) {
+          const cfg = FLOOF.state.petalConfigs[entry.idx];
+          const tier = cfg && cfg.tiers[entry.tier];
+          if (tier && Number.isFinite(tier.health)) {
+            segMaxHp = tier.health / Math.max(1, segCount);
+          }
+        }
+        initSlotPhysics(i, ps, segCount, entry ? entry.idx : -1, segMaxHp);
       }
       renderDpsTable();
     }
@@ -7995,7 +8036,12 @@ globalThis.RARITY_TABLE = {
     function getMobRadiusPx() {
       const stats = RARITY_TABLE[dpsState.mobTier] || { size: 1 };
       const size = stats.size || 1;
-      return Math.max(14, Math.min(80, 18 * size));
+      return Math.max(14, 18 * size);
+    }
+
+    function getMobCenterX() {
+      const shift = dpsState.mobTier > 4 ? 10 : 5;
+      return MOB_HITBOX_DISTANCE + getMobRadiusPx() - shift;
     }
 
     function getMobDamage() {
@@ -8011,7 +8057,7 @@ globalThis.RARITY_TABLE = {
         const entry = dpsState.loadout[i];
         if (!entry) continue;
         const ps = dpsState.perSlot && dpsState.perSlot[i];
-        if (ps && !ps.alive) continue;
+        if (ps && !ps.segments.some(s => s.alive)) continue;
         const cfg = FLOOF.state.petalConfigs[entry.idx];
         const tier = cfg && cfg.tiers[entry.tier];
         if (tier && tier.extraRadians) extra += tier.extraRadians;
@@ -8031,7 +8077,7 @@ globalThis.RARITY_TABLE = {
 
       const mobR = getMobRadiusPx();
       const segR = getSegmentHitRadius();
-      const mobX = MOB_HITBOX_DISTANCE;
+      const mobX = getMobCenterX();
       const mobY = 0;
       const mobDamagePerTick = getMobDamage();
       const minDist = segR + mobR;
@@ -8048,22 +8094,9 @@ globalThis.RARITY_TABLE = {
         const petalBase = petals[entry.idx];
         const reloadBase = parseNumber(petalBase.reload) || 0;
         const reloadSec = reloadBase > 0 ? reloadBase / 22.5 : 0;
-        const hitDamagePerSeg = Number(tier.damage) || 0;
-        const maxHp = Number.isFinite(tier.health) ? tier.health : 0;
-
-        for (const seg of ps.segments) {
-          seg.prevPos.x = seg.pos.x;
-          seg.prevPos.y = seg.pos.y;
-        }
-
-        if (!ps.alive) {
-          if (dpsState.simT >= ps.reloadUntil) {
-            ps.alive = true;
-            ps.hp = maxHp;
-            initSlotPhysics(i, ps, ps.segments.length || 1);
-          }
-          continue;
-        }
+        const N = Math.max(1, ps.segments.length);
+        const segDmg = (Number(tier.damage) || 0) / N;
+        const segMaxHp = (Number.isFinite(tier.health) ? tier.health : 0) / N;
 
         const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
         const cosA = Math.cos(a);
@@ -8072,6 +8105,16 @@ globalThis.RARITY_TABLE = {
         const slotTy = ORBIT_RADIUS * sinA;
 
         for (const seg of ps.segments) {
+          seg.prevPos.x = seg.pos.x;
+          seg.prevPos.y = seg.pos.y;
+
+          if (!seg.alive) {
+            if (dpsState.simT >= seg.reloadUntil) {
+              respawnSegmentAt(seg, i, segMaxHp);
+            }
+            continue;
+          }
+
           const tx = slotTx + seg.offX * cosA - seg.offY * sinA;
           const ty = slotTy + seg.offX * sinA + seg.offY * cosA;
 
@@ -8099,14 +8142,21 @@ globalThis.RARITY_TABLE = {
               seg.vel.x -= vn * nx;
               seg.vel.y -= vn * ny;
             }
+            const effectiveDmg = Math.max(1, segDmg - dpsState.mobArmor);
             ps.hits++;
-            ps.damageDealt += hitDamagePerSeg;
-            ps.hp -= mobDamagePerTick;
-            if (ps.hp <= 0) {
-              ps.alive = false;
+            ps.damageDealt += effectiveDmg;
+            if (dpsState.mobMaxHp > 0) {
+              dpsState.mobHp -= effectiveDmg;
+              if (dpsState.mobHp <= 0) {
+                dpsState.mobDeaths++;
+                dpsState.mobHp = dpsState.mobMaxHp;
+              }
+            }
+            seg.hp -= mobDamagePerTick;
+            if (seg.hp <= 0) {
+              seg.alive = false;
               ps.deaths++;
-              ps.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
-              break;
+              seg.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
             }
           }
         }
@@ -8128,12 +8178,17 @@ globalThis.RARITY_TABLE = {
 
       const worldHalf = ORBIT_RADIUS + 80;
       const scale = (size / 2) / worldHalf;
+
       ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, size, size);
+      ctx.clip();
+
       ctx.translate(size / 2, size / 2);
       ctx.scale(scale, scale);
 
       const mobR = getMobRadiusPx();
-      const mobX = MOB_HITBOX_DISTANCE;
+      const mobX = getMobCenterX();
 
       ctx.strokeStyle = 'rgba(255,80,80,0.55)';
       ctx.lineWidth = 1.4 / scale;
@@ -8157,16 +8212,26 @@ globalThis.RARITY_TABLE = {
         const entry = dpsState.loadout[i];
         if (!entry) continue;
         const ps = dpsState.perSlot ? dpsState.perSlot[i] : null;
-        if (!ps || !ps.alive) continue;
+        if (!ps) continue;
         const cfg = FLOOF.state.petalConfigs[entry.idx];
+        const tier = cfg ? cfg.tiers[entry.tier] : null;
         const origSplits = cfg ? cfg.splits : undefined;
+        const origCount = tier ? tier.count : undefined;
+        const origIconCount = tier && tier.icon ? tier.icon.count : undefined;
         if (cfg && cfg.splits != null && cfg.splits > 1) cfg.splits = 1;
+        if (tier && tier.count > 1) tier.count = 1;
+        if (tier && tier.icon && tier.icon.count > 1) tier.icon.count = 1;
+        const isMissileLike = MISSILE_LIKE_IDX.has(entry.idx);
         try {
           for (const seg of ps.segments) {
+            if (!seg.alive) continue;
             const x = seg.prevPos.x + (seg.pos.x - seg.prevPos.x) * lerp;
             const y = seg.prevPos.y + (seg.pos.y - seg.prevPos.y) * lerp;
             ctx.save();
             ctx.translate(x, y);
+            if (isMissileLike) {
+              ctx.rotate(Math.atan2(y, x) + Math.PI / 4);
+            }
             ctx.scale(segDrawR, segDrawR);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -8175,6 +8240,8 @@ globalThis.RARITY_TABLE = {
           }
         } catch (_) {}
         if (cfg) cfg.splits = origSplits;
+        if (tier) tier.count = origCount;
+        if (tier && tier.icon) tier.icon.count = origIconCount;
       }
 
       ctx.restore();
@@ -8230,6 +8297,17 @@ globalThis.RARITY_TABLE = {
         tbody.appendChild(tr);
       }
       document.getElementById('dpsTotal').textContent = abbreviate(totalDps) + ' / s';
+      const hpEl = document.getElementById('dpsMobHp');
+      if (hpEl) {
+        if (dpsState.mobMaxHp > 0) {
+          const pct = Math.max(0, dpsState.mobHp / dpsState.mobMaxHp * 100);
+          hpEl.textContent = pct.toFixed(pct < 10 ? 2 : 1) + '%';
+        } else {
+          hpEl.textContent = '—';
+        }
+      }
+      const dEl = document.getElementById('dpsMobDeaths');
+      if (dEl) dEl.textContent = String(dpsState.mobDeaths);
     }
 
     const pickerEl = document.getElementById('picker');
