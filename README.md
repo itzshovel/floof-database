@@ -5,8 +5,8 @@ A database for petals, mobs, and even a DPS simulation.
 ## Files
 
 - **`index.html`** - the main file. Host it or open it locally.
-- **`petals.json`** — every petal's stats and abilities 
-- **`data.txt`** — same info but more readable for organization
+- **`petals.json`** - every petal's stats and abilities 
+- **`data.txt`** - same info but more readable for organization
 
 ## Tabs
 
