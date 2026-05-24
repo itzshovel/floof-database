@@ -8095,7 +8095,7 @@ globalThis.RARITY_TABLE = {
         const reloadBase = parseNumber(petalBase.reload) || 0;
         const reloadSec = reloadBase > 0 ? reloadBase / 22.5 : 0;
         const N = Math.max(1, ps.segments.length);
-        const segDmg = (Number(tier.damage) || 0) / N;
+        const segDmg = Number(tier.damage) || 0;
         const segMaxHp = (Number.isFinite(tier.health) ? tier.health : 0) / N;
 
         const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
@@ -8142,7 +8142,7 @@ globalThis.RARITY_TABLE = {
               seg.vel.x -= vn * nx;
               seg.vel.y -= vn * ny;
             }
-            const effectiveDmg = Math.max(1, segDmg - dpsState.mobArmor);
+            const effectiveDmg = segDmg > dpsState.mobArmor ? segDmg : 0;
             ps.hits++;
             ps.damageDealt += effectiveDmg;
             if (dpsState.mobMaxHp > 0) {
