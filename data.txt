@@ -1,4 +1,4 @@
-# Floof petal data - extracted from message (4).txt
+# Floof petal data
 # 101 petals
 
 idx   name                              cooldown    health          damage        
