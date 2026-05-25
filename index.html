@@ -7956,6 +7956,11 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       tickCount: 0,
       lastAngularVel: ANGULAR_VELOCITY,
       perSlot: null,
+      virtualLayout: {
+        totalVirtual: NUM_SLOTS,
+        slotStart: new Array(NUM_SLOTS).fill(0).map((_, i) => i),
+        slotIsLateral: new Array(NUM_SLOTS).fill(false),
+      },
       animId: null,
       lastStatsT: 0,
       mobHp: 0,
@@ -7980,15 +7985,40 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     const LIGHT_IDX = 1;
     const BLOOD_LIGHT_IDX = 84;
     const LATERAL_SPLIT_IDX = new Set([LIGHT_IDX, BLOOD_LIGHT_IDX, FIRE_MISSILE_IDX]);
-    const SLOT_ARC_SPACING = ORBIT_RADIUS * Math.PI * 2 / NUM_SLOTS;
+
+    function rebuildVirtualLayout() {
+      const slotStart = new Array(NUM_SLOTS);
+      const slotIsLateral = new Array(NUM_SLOTS);
+      let total = 0;
+      for (let i = 0; i < NUM_SLOTS; i++) {
+        slotStart[i] = total;
+        const entry = dpsState.loadout[i];
+        let n = 1, lateral = false;
+        if (entry) {
+          const segCount = getSegmentCount(entry.idx, entry.tier);
+          if (LATERAL_SPLIT_IDX.has(entry.idx) && segCount > 1) {
+            n = segCount;
+            lateral = true;
+          }
+        }
+        slotIsLateral[i] = lateral;
+        total += n;
+      }
+      dpsState.virtualLayout = { totalVirtual: total, slotStart, slotIsLateral };
+    }
+
+    function getSegmentSlotAngle(baseSlot, segIdx) {
+      const VL = dpsState.virtualLayout;
+      const start = VL.slotStart[baseSlot];
+      const virtualIdx = start + (VL.slotIsLateral[baseSlot] ? segIdx : 0);
+      return dpsState.angle + (virtualIdx / VL.totalVirtual) * Math.PI * 2;
+    }
 
     function segmentLocalOffsets(N, petalIdx) {
       const out = [];
       if (N <= 1) { out.push({ x: 0, y: 0 }); return out; }
       if (LATERAL_SPLIT_IDX.has(petalIdx)) {
-        for (let j = 0; j < N; j++) {
-          out.push({ x: 0, y: (j - (N - 1) / 2) * SLOT_ARC_SPACING });
-        }
+        for (let j = 0; j < N; j++) out.push({ x: 0, y: 0 });
         return out;
       }
       const clusterR = Math.max(6, 3 + 1.5 * N);
@@ -8002,17 +8032,18 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     function initSlotPhysics(i, ps, segCount, petalIdx, segMaxHp) {
       const N = Math.max(1, segCount | 0);
       const offsets = segmentLocalOffsets(N, petalIdx);
-      const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
-      const cosA = Math.cos(a);
-      const sinA = Math.sin(a);
-      const slotTx = ORBIT_RADIUS * cosA;
-      const slotTy = ORBIT_RADIUS * sinA;
       ps.segments = [];
       for (let s = 0; s < N; s++) {
         const off = offsets[s];
+        const a = getSegmentSlotAngle(i, s);
+        const cosA = Math.cos(a);
+        const sinA = Math.sin(a);
+        const slotTx = ORBIT_RADIUS * cosA;
+        const slotTy = ORBIT_RADIUS * sinA;
         const wx = slotTx + off.x * cosA - off.y * sinA;
         const wy = slotTy + off.x * sinA + off.y * cosA;
         ps.segments.push({
+          segIdx: s,
           offX: off.x,
           offY: off.y,
           pos: { x: wx, y: wy },
@@ -8027,7 +8058,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     }
 
     function respawnSegmentAt(seg, slotIdx, segMaxHp) {
-      const a = dpsState.angle + (slotIdx / NUM_SLOTS) * Math.PI * 2;
+      const a = getSegmentSlotAngle(slotIdx, seg.segIdx);
       const cosA = Math.cos(a);
       const sinA = Math.sin(a);
       const slotTx = ORBIT_RADIUS * cosA;
@@ -8161,6 +8192,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       dpsState.mobHp = dpsState.mobMaxHp;
       dpsState.mobArmor = Number(mobStats.armor) || 0;
       dpsState.mobDeaths = 0;
+      rebuildVirtualLayout();
       for (let i = 0; i < NUM_SLOTS; i++) {
         const ps = dpsState.perSlot[i];
         const entry = dpsState.loadout[i];
@@ -8268,12 +8300,6 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         const segDmg = Number(tier.damage) || 0;
         const segMaxHp = (Number.isFinite(tier.health) ? tier.health : 0) / N;
 
-        const a = dpsState.angle + (i / NUM_SLOTS) * Math.PI * 2;
-        const cosA = Math.cos(a);
-        const sinA = Math.sin(a);
-        const slotTx = ORBIT_RADIUS * cosA;
-        const slotTy = ORBIT_RADIUS * sinA;
-
         for (const seg of ps.segments) {
           seg.prevPos.x = seg.pos.x;
           seg.prevPos.y = seg.pos.y;
@@ -8285,6 +8311,11 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
             continue;
           }
 
+          const segA = getSegmentSlotAngle(i, seg.segIdx);
+          const cosA = Math.cos(segA);
+          const sinA = Math.sin(segA);
+          const slotTx = ORBIT_RADIUS * cosA;
+          const slotTy = ORBIT_RADIUS * sinA;
           const tx = slotTx + seg.offX * cosA - seg.offY * sinA;
           const ty = slotTy + seg.offX * sinA + seg.offY * cosA;
 
