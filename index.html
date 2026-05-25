@@ -8032,6 +8032,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     function initSlotPhysics(i, ps, segCount, petalIdx, segMaxHp) {
       const N = Math.max(1, segCount | 0);
       const offsets = segmentLocalOffsets(N, petalIdx);
+      const angVel = computeAngularVelocity();
       ps.segments = [];
       for (let s = 0; s < N; s++) {
         const off = offsets[s];
@@ -8048,7 +8049,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
           offY: off.y,
           pos: { x: wx, y: wy },
           prevPos: { x: wx, y: wy },
-          vel: { x: 0, y: 0 },
+          vel: { x: -wy * angVel, y: wx * angVel },
           alive: true,
           hp: segMaxHp,
           maxHp: segMaxHp,
@@ -8065,9 +8066,10 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       const slotTy = ORBIT_RADIUS * sinA;
       const wx = slotTx + seg.offX * cosA - seg.offY * sinA;
       const wy = slotTy + seg.offX * sinA + seg.offY * cosA;
+      const angVel = computeAngularVelocity();
       seg.pos.x = wx; seg.pos.y = wy;
       seg.prevPos.x = wx; seg.prevPos.y = wy;
-      seg.vel.x = 0; seg.vel.y = 0;
+      seg.vel.x = -wy * angVel; seg.vel.y = wx * angVel;
       seg.alive = true;
       seg.hp = segMaxHp;
       seg.maxHp = segMaxHp;
@@ -8321,8 +8323,10 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
 
           let dx = seg.pos.x - tx;
           let dy = seg.pos.y - ty;
-          const ax = -SPRING_K * dx - SPRING_DAMP * seg.vel.x;
-          const ay = -SPRING_K * dy - SPRING_DAMP * seg.vel.y;
+          const targetVx = -seg.pos.y * angularVel;
+          const targetVy = seg.pos.x * angularVel;
+          const ax = -SPRING_K * dx - SPRING_DAMP * (seg.vel.x - targetVx);
+          const ay = -SPRING_K * dy - SPRING_DAMP * (seg.vel.y - targetVy);
           seg.vel.x += ax * dt;
           seg.vel.y += ay * dt;
           dx += seg.vel.x * dt;
