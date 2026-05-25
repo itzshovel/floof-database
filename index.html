@@ -8324,15 +8324,17 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
           const targetR = Math.sqrt(tx * tx + ty * ty) || 1e-4;
           const targetErx = tx / targetR;
           const targetEry = ty / targetR;
-          const segRadial = seg.pos.x * targetErx + seg.pos.y * targetEry;
-          const vRadial = seg.vel.x * targetErx + seg.vel.y * targetEry;
-          const fr = -SPRING_K * (segRadial - targetR) - SPRING_DAMP * vRadial;
+          const segR = Math.sqrt(seg.pos.x * seg.pos.x + seg.pos.y * seg.pos.y) || 1e-4;
+          const segErx = seg.pos.x / segR;
+          const segEry = seg.pos.y / segR;
+          const vRadial = seg.vel.x * segErx + seg.vel.y * segEry;
+          const fr = -SPRING_K * (segR - targetR) - SPRING_DAMP * vRadial;
           const newVRadial = vRadial + fr * dt;
-          const newSegRadial = segRadial + newVRadial * dt;
-          const tangentVx = -targetEry * targetR * angularVel;
-          const tangentVy = targetErx * targetR * angularVel;
-          seg.pos.x = tx + (newSegRadial - targetR) * targetErx;
-          seg.pos.y = ty + (newSegRadial - targetR) * targetEry;
+          const newSegR = segR + newVRadial * dt;
+          const tangentVx = -targetEry * newSegR * angularVel;
+          const tangentVy = targetErx * newSegR * angularVel;
+          seg.pos.x = targetErx * newSegR;
+          seg.pos.y = targetEry * newSegR;
           seg.vel.x = newVRadial * targetErx + tangentVx;
           seg.vel.y = newVRadial * targetEry + tangentVy;
 
@@ -8366,22 +8368,6 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
               seg.alive = false;
               ps.deaths++;
               seg.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
-            }
-          }
-
-          const rx = seg.pos.x;
-          const ry = seg.pos.y;
-          const r2 = rx * rx + ry * ry;
-          if (r2 < ORBIT_RADIUS * ORBIT_RADIUS) {
-            const r = Math.sqrt(r2) || 1e-4;
-            const nrx = rx / r;
-            const nry = ry / r;
-            seg.pos.x = nrx * ORBIT_RADIUS;
-            seg.pos.y = nry * ORBIT_RADIUS;
-            const vRadial = seg.vel.x * nrx + seg.vel.y * nry;
-            if (vRadial < 0) {
-              seg.vel.x -= vRadial * nrx;
-              seg.vel.y -= vRadial * nry;
             }
           }
         }
