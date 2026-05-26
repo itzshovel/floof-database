@@ -423,8 +423,9 @@
       max-width: 520px;
       margin: 0 auto 14px;
       border-radius: 14px;
-      background: rgba(0,0,0,0.15);
+      background: #555a64;
       border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
     }
     .sim-canvas { width: 100%; height: 100%; display: block; }
     .dps-table {
@@ -7379,6 +7380,25 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     function tierMul(t) { return PETAL_TIER_TABLE[t] || { health: 1, damage: 1 }; }
     function tierLabel(t) { return TIER_LABELS[t] || ('Tier ' + t); }
     function tierColor(t) { return TIER_COLORS[t] || '#a06d3e'; }
+    function isInternalPetalName(name) {
+      const lower = String(name || '').toLowerCase();
+      return lower.includes('projectile') || lower.includes('player.launched');
+    }
+    function isVisiblePetalIdx(idx) {
+      return !!petals[idx] && !isInternalPetalName(petals[idx].name);
+    }
+    function getDpsPetalName(idx) {
+      const cfg = FLOOF.state.petalConfigs[idx];
+      return String(petals[idx]?.name || cfg?.name || '').toLowerCase();
+    }
+    function isDpsNoHitPetalIdx(idx) {
+      const cfg = FLOOF.state.petalConfigs[idx];
+      const name = getDpsPetalName(idx);
+      return !!cfg?.wearable || name === 'yggdrasil';
+    }
+    function isDpsCenterWearablePetalIdx(idx) {
+      return ['third eye', 'antennae', 'air', 'armor'].includes(getDpsPetalName(idx));
+    }
 
     function getSegmentCount(idx, tier) {
       const cfg = FLOOF.state.petalConfigs[idx];
@@ -7527,6 +7547,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       };
       const items = opts.items;
       const tiersList = opts.tiers;
+      const includeItem = opts.includeItem || (() => true);
       const state = {
         query: '',
         tier: opts.defaultTier,
@@ -7536,10 +7557,21 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       let renderToken = 0;
       let searchTimer = null;
 
+      function visibleItems() {
+        return items.map((it, i) => ({ it, i })).filter(({ it, i }) => includeItem(it, i));
+      }
+
+      function ensureSelectedVisible() {
+        if (items[state.selectedIdx] && includeItem(items[state.selectedIdx], state.selectedIdx)) return;
+        const first = visibleItems()[0];
+        state.selectedIdx = first ? first.i : 0;
+      }
+
       function filtered() {
+        const list = visibleItems();
         const q = state.query.trim().toLowerCase();
-        if (!q) return items.map((it, i) => ({ it, i }));
-        return items.map((it, i) => ({ it, i })).filter(({ it }) => it.name.toLowerCase().includes(q));
+        if (!q) return list;
+        return list.filter(({ it }) => it.name.toLowerCase().includes(q));
       }
 
       function renderTierSelect() {
@@ -7554,6 +7586,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       }
 
       function renderSelected() {
+        ensureSelectedVisible();
         opts.renderSelected(els.selectedCard, items[state.selectedIdx] || items[0], state.selectedIdx, state.tier);
       }
 
@@ -7581,6 +7614,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       }
 
       function renderGrid() {
+        ensureSelectedVisible();
         const list = filtered();
         els.countBadge.textContent = list.length + ' ' + opts.noun;
         els.cardGrid.innerHTML = '';
@@ -7857,6 +7891,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       tiers,
       defaultTier: 5,
       noun: 'petals',
+      includeItem: (_petal, idx) => isVisiblePetalIdx(idx),
       tierLabel,
       drawCardIcon: drawPetalInto,
       getTooltipBitmap: getPetalTooltipBitmap,
@@ -7980,7 +8015,6 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       return out;
     }
 
-    const MISSILE_LIKE_IDX = new Set([16, 85, 99]);
     const FIRE_MISSILE_IDX = 85;
     const LIGHT_IDX = 1;
     const BLOOD_LIGHT_IDX = 84;
@@ -7995,10 +8029,12 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         const entry = dpsState.loadout[i];
         let n = 1, lateral = false;
         if (entry) {
-          const segCount = getSegmentCount(entry.idx, entry.tier);
-          if (LATERAL_SPLIT_IDX.has(entry.idx) && segCount > 1) {
-            n = segCount;
-            lateral = true;
+          if (!isDpsCenterWearablePetalIdx(entry.idx)) {
+            const segCount = getSegmentCount(entry.idx, entry.tier);
+            if (LATERAL_SPLIT_IDX.has(entry.idx) && segCount > 1) {
+              n = segCount;
+              lateral = true;
+            }
           }
         }
         slotIsLateral[i] = lateral;
@@ -8032,7 +8068,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     function initSlotPhysics(i, ps, segCount, petalIdx, segMaxHp) {
       const N = Math.max(1, segCount | 0);
       const offsets = segmentLocalOffsets(N, petalIdx);
-      const angVel = computeAngularVelocity();
+      const angVel = getOrbitAngularVelocity();
       ps.segments = [];
       for (let s = 0; s < N; s++) {
         const off = offsets[s];
@@ -8066,7 +8102,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       const slotTy = ORBIT_RADIUS * sinA;
       const wx = slotTx + seg.offX * cosA - seg.offY * sinA;
       const wy = slotTy + seg.offX * sinA + seg.offY * cosA;
-      const angVel = computeAngularVelocity();
+      const angVel = getOrbitAngularVelocity();
       seg.pos.x = wx; seg.pos.y = wy;
       seg.prevPos.x = wx; seg.prevPos.y = wy;
       seg.vel.x = -wy * angVel; seg.vel.y = wx * angVel;
@@ -8198,6 +8234,10 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       for (let i = 0; i < NUM_SLOTS; i++) {
         const ps = dpsState.perSlot[i];
         const entry = dpsState.loadout[i];
+        if (entry && isDpsCenterWearablePetalIdx(entry.idx)) {
+          ps.segments = [];
+          continue;
+        }
         const segCount = entry ? getSegmentCount(entry.idx, entry.tier) : 1;
         let segMaxHp = 0;
         if (entry) {
@@ -8269,11 +8309,15 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       return ANGULAR_VELOCITY + extra * EXTRA_RADIANS_TO_RAD_PER_SEC;
     }
 
+    function getOrbitAngularVelocity() {
+      return -computeAngularVelocity();
+    }
+
     function getSegmentHitRadius() { return getPetalDisplayRadius() * 0.7; }
 
     function simTick() {
       const dt = SIM_TICK_DT;
-      const angularVel = computeAngularVelocity();
+      const angularVel = getOrbitAngularVelocity();
       dpsState.lastAngularVel = angularVel;
       dpsState.simT += dt;
       dpsState.angle += angularVel * dt;
@@ -8290,6 +8334,8 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       for (let i = 0; i < NUM_SLOTS; i++) {
         const entry = dpsState.loadout[i];
         if (!entry) continue;
+        if (isDpsCenterWearablePetalIdx(entry.idx)) continue;
+        const noHit = isDpsNoHitPetalIdx(entry.idx);
         const ps = dpsState.perSlot[i];
         const cfg = FLOOF.state.petalConfigs[entry.idx];
         if (!cfg) continue;
@@ -8337,6 +8383,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
           seg.pos.y = targetEry * newSegR;
           seg.vel.x = newVRadial * targetErx + tangentVx;
           seg.vel.y = newVRadial * targetEry + tangentVy;
+          if (noHit) continue;
 
           const mdx = seg.pos.x - mobX;
           const mdy = seg.pos.y - mobY;
@@ -8385,7 +8432,8 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       cv.style.width = size + 'px'; cv.style.height = size + 'px';
       const ctx = cv.getContext('2d');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, size, size);
+      ctx.fillStyle = '#555a64';
+      ctx.fillRect(0, 0, size, size);
 
       const worldHalf = ORBIT_RADIUS + 80;
       const scale = (size / 2) / worldHalf;
@@ -8419,9 +8467,11 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       const petalR = getPetalDisplayRadius();
       const segDrawR = petalR * 0.85;
       const lerp = dpsState.paused ? 1 : Math.max(0, Math.min(1, dpsState.tickAccumulator / SIM_TICK_DT));
+      const petalSpinAngle = dpsState.angle + (dpsState.paused ? 0 : dpsState.lastAngularVel * dpsState.tickAccumulator);
       for (let i = 0; i < NUM_SLOTS; i++) {
         const entry = dpsState.loadout[i];
         if (!entry) continue;
+        if (isDpsCenterWearablePetalIdx(entry.idx)) continue;
         const ps = dpsState.perSlot ? dpsState.perSlot[i] : null;
         if (!ps) continue;
         const cfg = FLOOF.state.petalConfigs[entry.idx];
@@ -8432,7 +8482,6 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         if (cfg && cfg.splits != null && cfg.splits > 1) cfg.splits = 1;
         if (tier && tier.count > 1) tier.count = 1;
         if (tier && tier.icon && tier.icon.count > 1) tier.icon.count = 1;
-        const isMissileLike = MISSILE_LIKE_IDX.has(entry.idx);
         try {
           for (const seg of ps.segments) {
             if (!seg.alive) continue;
@@ -8440,9 +8489,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
             const y = seg.prevPos.y + (seg.pos.y - seg.prevPos.y) * lerp;
             ctx.save();
             ctx.translate(x, y);
-            if (isMissileLike) {
-              ctx.rotate(Math.atan2(y, x) + Math.PI / 4);
-            }
+            ctx.rotate(petalSpinAngle);
             ctx.scale(segDrawR, segDrawR);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -8465,11 +8512,46 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         ctx.drawImage(centerImg, cx, cy, CENTER_IMG_SIZE, CENTER_IMG_SIZE);
         ctx.restore();
       }
+      drawEquippedWearables(ctx, dpr, size);
 
       ctx.fillStyle = '#9aa3c0';
       ctx.font = '12px Ubuntu, sans-serif';
       ctx.textBaseline = 'top';
       ctx.fillText('t = ' + dpsState.simT.toFixed(1) + 's', 10, 8);
+    }
+
+    function drawEquippedWearables(ctx, dpr, size) {
+      const equipped = new Map();
+      for (const entry of dpsState.loadout) {
+        if (!entry || !isDpsCenterWearablePetalIdx(entry.idx)) continue;
+        const name = getDpsPetalName(entry.idx);
+        if (!equipped.has(name)) equipped.set(name, entry);
+      }
+      if (!equipped.size) return;
+
+      const placements = {
+        'third eye': { x: 0, y: -8, scale: 5.4 },
+        antennae: { x: 0, y: -25, scale: 12 },
+        armor: { x: 0, y: 0, scale: 28 },
+      };
+      const drawOrder = ['antennae', 'armor', 'third eye'];
+
+      ctx.save();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      for (const name of drawOrder) {
+        const entry = equipped.get(name);
+        if (!entry) continue;
+        const placement = placements[name];
+        ctx.save();
+        ctx.translate(size / 2 + placement.x, size / 2 + placement.y);
+        if (placement.rotate) ctx.rotate(placement.rotate);
+        ctx.scale(placement.scale, placement.scale);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        try { FLOOF.drawUIPetal(entry.idx, entry.tier, ctx); } catch (_) {}
+        ctx.restore();
+      }
+      ctx.restore();
     }
 
     function renderDpsTable() {
@@ -8551,6 +8633,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       const tier = getPickerTier();
       const frag = document.createDocumentFragment();
       petals.forEach((p, i) => {
+        if (!isVisiblePetalIdx(i)) return;
         if (q && !p.name.toLowerCase().includes(q)) return;
         const card = document.createElement('div');
         card.className = 'card';
