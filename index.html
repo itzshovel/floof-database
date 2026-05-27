@@ -7477,6 +7477,43 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
       return null;
     }
 
+    const BASELINE_HEALTH = 10;
+    const BASELINE_DAMAGE = 5;
+
+    function getMobScaledStats(name, tier) {
+      const tierMul = RARITY_TABLE[tier] || { health: 0, damage: 0, size: 1, armor: 0 };
+      const base = lookupMobBase(name);
+      if (!base) {
+        return { health: tierMul.health, damage: tierMul.damage, armor: tierMul.armor, size: tierMul.size, speed: null, base: null };
+      }
+      return {
+        health: base.health * tierMul.health / BASELINE_HEALTH,
+        damage: base.damage * tierMul.damage / BASELINE_DAMAGE,
+        armor: tierMul.armor,
+        size: tierMul.size,
+        speed: base.speed,
+        base,
+      };
+    }
+
+    function patchMobConfigsWithScaledStats() {
+      const configs = FLOOF.state && FLOOF.state.mobConfigs;
+      const names = FLOOF.MOB_NAMES || [];
+      if (!configs) return;
+      for (let i = 0; i < configs.length && i < names.length; i++) {
+        const cfg = configs[i];
+        if (!cfg || !Array.isArray(cfg.tiers)) continue;
+        const base = lookupMobBase(names[i]);
+        if (!base) continue;
+        for (let t = 0; t < cfg.tiers.length; t++) {
+          const r = RARITY_TABLE[t];
+          if (!r) continue;
+          cfg.tiers[t].health = base.health * r.health / BASELINE_HEALTH;
+          cfg.tiers[t].damage = base.damage * r.damage / BASELINE_DAMAGE;
+        }
+      }
+    }
+
     function getSegmentCount(idx, tier) {
       const cfg = FLOOF.state.petalConfigs[idx];
       if (!cfg || !Array.isArray(cfg.tiers)) return 1;
@@ -7823,8 +7860,8 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
 
     function renderMobSelected(container, mob, idx, tier) {
       container.innerHTML = '';
-      const stats = RARITY_TABLE[tier] || { health: 0, damage: 0, size: 1, armor: 0 };
-      const base = lookupMobBase(mob.name);
+      const scaled = getMobScaledStats(mob.name, tier);
+      const base = scaled.base;
 
       const iconWrap = document.createElement('div');
       iconWrap.className = 'iconWrap';
@@ -7847,20 +7884,20 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
       const desc = document.createElement('div');
       desc.className = 'desc';
       if (base) {
-        desc.textContent = 'Base — hp ' + base.health + ', dmg ' + base.damage + ', size ' + base.size + ', speed ' + base.speed + '  ·  Rarity ' + tier + ' ×size ' + (stats.size || 1);
+        desc.textContent = 'Base — hp ' + base.health + ', dmg ' + base.damage + ', size ' + base.size + ', speed ' + base.speed + '  ·  Rarity ' + tier + ' ×size ' + (scaled.size || 1);
       } else {
-        desc.textContent = 'Rarity ' + tier + ' size multiplier ×' + (stats.size || 1);
+        desc.textContent = 'Rarity ' + tier + ' size multiplier ×' + (scaled.size || 1);
       }
       info.appendChild(desc);
 
       const statsDiv = document.createElement('div');
       statsDiv.className = 'stats';
       const pairs = [
-        ['Health', abbreviate(stats.health)],
-        ['Damage', abbreviate(stats.damage)],
-        ['Armor',  abbreviate(stats.armor)],
-        ['Size',   String(stats.size)],
-        ['Speed',  base ? String(base.speed) : '—'],
+        ['Health', abbreviate(scaled.health)],
+        ['Damage', abbreviate(scaled.damage)],
+        ['Armor',  abbreviate(scaled.armor)],
+        ['Size',   String(scaled.size)],
+        ['Speed',  scaled.speed != null ? String(scaled.speed) : '—'],
       ];
       for (const [k, val] of pairs) {
         const pair = document.createElement('div');
@@ -8427,10 +8464,11 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
       dpsState.tickCount = 0;
       dpsState.lastFrameT = performance.now();
       dpsState.perSlot = makePerSlotState();
-      const mobStats = RARITY_TABLE[dpsState.mobTier] || {};
-      dpsState.mobMaxHp = Number(mobStats.health) || 0;
+      const mobName = (FLOOF.MOB_NAMES && FLOOF.MOB_NAMES[dpsState.mobIdx]) || '';
+      const mobScaled = getMobScaledStats(mobName, dpsState.mobTier);
+      dpsState.mobMaxHp = Number(mobScaled.health) || 0;
       dpsState.mobHp = dpsState.mobMaxHp;
-      dpsState.mobArmor = Number(mobStats.armor) || 0;
+      dpsState.mobArmor = Number(mobScaled.armor) || 0;
       dpsState.mobDeaths = 0;
       rebuildVirtualLayout();
       for (let i = 0; i < NUM_SLOTS; i++) {
@@ -8508,8 +8546,9 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
     }
 
     function getMobDamage() {
-      const stats = RARITY_TABLE[dpsState.mobTier] || { damage: 0 };
-      return Number(stats.damage) || 0;
+      const mobName = (FLOOF.MOB_NAMES && FLOOF.MOB_NAMES[dpsState.mobIdx]) || '';
+      const scaled = getMobScaledStats(mobName, dpsState.mobTier);
+      return Number(scaled.damage) || 0;
     }
 
     function getPetalDisplayRadius() { return 12; }
@@ -8939,6 +8978,8 @@ globalThis.MOB_BASE_STATS = {"Ladybug":{"health":25,"damage":10,"size":25,"speed
     }
     document.getElementById('pickerClose').addEventListener('click', closePicker);
     pickerEl.addEventListener('click', (e) => { if (e.target === pickerEl) closePicker(); });
+
+    patchMobConfigsWithScaledStats();
 
     async function boot() {
       try {
