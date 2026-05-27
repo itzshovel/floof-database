@@ -458,6 +458,36 @@
       gap: 8px;
       margin-bottom: 10px;
     }
+    .orbit-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      align-items: end;
+      margin-bottom: 10px;
+    }
+    .orbit-controls label {
+      display: grid;
+      gap: 5px;
+      color: #9aa3c0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.72rem;
+    }
+    .orbit-controls input[type="range"] {
+      width: 100%;
+      accent-color: #7b8cff;
+    }
+    .orbit-controls select:disabled,
+    .orbit-controls input:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .orbit-readout {
+      color: #c7cee5;
+      font-size: 0.76rem;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
     .sim-buttons button {
       appearance: none;
       border: 1px solid rgba(123,140,255,0.4);
@@ -7177,6 +7207,26 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
 
         <div class="dps-section">
           <h3>Simulation</h3>
+          <div class="orbit-controls">
+            <label>Orbit
+              <select id="dpsOrbitMode">
+                <option value="wheel">Wheel</option>
+                <option value="yy">YY</option>
+              </select>
+            </label>
+            <label>Angle
+              <input id="dpsYyAngle" type="range" min="0" max="360" step="1" value="0">
+              <span class="orbit-readout" id="dpsYyStatus">0°</span>
+            </label>
+            <label>Distance
+              <input id="dpsMobDistance" type="range" min="0" max="100" step="1" value="42">
+              <span class="orbit-readout" id="dpsMobDistanceStatus">42%</span>
+            </label>
+            <label>Zoom
+              <input id="dpsSimZoom" type="range" min="0.6" max="1.8" step="0.05" value="1">
+              <span class="orbit-readout" id="dpsSimZoomStatus">100%</span>
+            </label>
+          </div>
           <div class="sim-buttons">
             <button id="dpsRun">Restart</button>
             <button id="dpsToggle">Start</button>
@@ -7266,9 +7316,19 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     const NUM_SLOTS = 10;
     const ORBIT_RADIUS = 150;
     const ANGULAR_VELOCITY = 2.5;
-    const MOB_HITBOX_DISTANCE = 130;
-    const SIM_TICK_RATE = 20;
+    const GAME_TICK_RATE = 22.5;
+    const FLOWER_TOUCH_RADIUS = 25;
+    const MOB_DISTANCE_DEFAULT_PCT = 42;
+    const MOB_DISTANCE_MIN = 0;
+    const MOB_DISTANCE_MAX = 260;
+    const MOB_DISTANCE_STEP = 1;
+    const SIM_TICK_RATE = 45;
     const SIM_TICK_DT = 1 / SIM_TICK_RATE;
+    const ZERO_RELOAD_SEC = 1 / GAME_TICK_RATE;
+    const SIM_STATS_UPDATE_MS = 50;
+    const SIM_ZOOM_MIN = 0.6;
+    const SIM_ZOOM_MAX = 1.8;
+    const SIM_ZOOM_STEP = 0.05;
     const EXTRA_RADIANS_TO_RAD_PER_SEC = 22.5;
     const MAX_MOB_RARITY = 21;
     const CENTER_IMG_SIZE = 50;
@@ -7416,7 +7476,9 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       const reloadBase = parseNumber(petal.reload);
       const dmg = dmgBase != null ? dmgBase * mul.damage : null;
       const hp = hpBase != null ? hpBase * mul.health : null;
-      const reloadSec = (reloadBase != null && reloadBase > 0) ? reloadBase / 22.5 : null;
+      const reloadSec = reloadBase != null
+        ? (reloadBase > 0 ? reloadBase / GAME_TICK_RATE : ZERO_RELOAD_SEC)
+        : null;
       const segCount = (typeof count === 'number' && count > 0) ? count : 1;
       const totalDmg = dmg != null ? dmg * segCount : null;
       const dps = (totalDmg != null && reloadSec != null && reloadSec > 0) ? totalDmg / reloadSec : null;
@@ -7990,6 +8052,10 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       tickAccumulator: 0,
       tickCount: 0,
       lastAngularVel: ANGULAR_VELOCITY,
+      orbitMode: 'wheel',
+      yyAngleDeg: 0,
+      mobDistancePct: MOB_DISTANCE_DEFAULT_PCT,
+      simZoom: 1,
       perSlot: null,
       virtualLayout: {
         totalVirtual: NUM_SLOTS,
@@ -8019,6 +8085,24 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     const LIGHT_IDX = 1;
     const BLOOD_LIGHT_IDX = 84;
     const LATERAL_SPLIT_IDX = new Set([LIGHT_IDX, BLOOD_LIGHT_IDX, FIRE_MISSILE_IDX]);
+
+    function isYinYangPetalIdx(idx) {
+      return getDpsPetalName(idx) === 'yin yang';
+    }
+
+    function getYinYangCount() {
+      return dpsState.loadout.reduce((count, entry) => (
+        entry && isYinYangPetalIdx(entry.idx) ? count + 1 : count
+      ), 0);
+    }
+
+    function isYyOrbitActive() {
+      return dpsState.orbitMode === 'yy' && getYinYangCount() >= 2;
+    }
+
+    function getYyAngleRad() {
+      return (Number(dpsState.yyAngleDeg) || 0) * Math.PI / 180;
+    }
 
     function rebuildVirtualLayout() {
       const slotStart = new Array(NUM_SLOTS);
@@ -8095,6 +8179,22 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     }
 
     function respawnSegmentAt(seg, slotIdx, segMaxHp) {
+      spawnSegmentFromFlower(seg, slotIdx);
+      seg.alive = true;
+      seg.hp = segMaxHp;
+      seg.maxHp = segMaxHp;
+    }
+
+    function spawnSegmentFromFlower(seg, slotIdx) {
+      const a = getSegmentSlotAngle(slotIdx, seg.segIdx);
+      const angVel = getOrbitAngularVelocity();
+      seg.pos.x = 0; seg.pos.y = 0;
+      seg.prevPos.x = 0; seg.prevPos.y = 0;
+      seg.vel.x = -Math.sin(a) * ORBIT_RADIUS * angVel;
+      seg.vel.y = Math.cos(a) * ORBIT_RADIUS * angVel;
+    }
+
+    function snapSegmentToOrbit(seg, slotIdx) {
       const a = getSegmentSlotAngle(slotIdx, seg.segIdx);
       const cosA = Math.cos(a);
       const sinA = Math.sin(a);
@@ -8106,9 +8206,19 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       seg.pos.x = wx; seg.pos.y = wy;
       seg.prevPos.x = wx; seg.prevPos.y = wy;
       seg.vel.x = -wy * angVel; seg.vel.y = wx * angVel;
-      seg.alive = true;
-      seg.hp = segMaxHp;
-      seg.maxHp = segMaxHp;
+    }
+
+    function snapDpsSegmentsToOrbit() {
+      if (!dpsState.perSlot) return;
+      for (let i = 0; i < NUM_SLOTS; i++) {
+        const entry = dpsState.loadout[i];
+        if (!entry || isDpsCenterWearablePetalIdx(entry.idx)) continue;
+        const ps = dpsState.perSlot[i];
+        if (!ps) continue;
+        for (const seg of ps.segments) {
+          if (seg.alive) snapSegmentToOrbit(seg, i);
+        }
+      }
     }
 
     function bootDps() {
@@ -8194,6 +8304,57 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       });
     }
 
+    function updateDpsOrbitControls() {
+      const modeEl = document.getElementById('dpsOrbitMode');
+      const angleEl = document.getElementById('dpsYyAngle');
+      const statusEl = document.getElementById('dpsYyStatus');
+      const distanceEl = document.getElementById('dpsMobDistance');
+      const distanceStatusEl = document.getElementById('dpsMobDistanceStatus');
+      const zoomEl = document.getElementById('dpsSimZoom');
+      const zoomStatusEl = document.getElementById('dpsSimZoomStatus');
+      if (modeEl) modeEl.value = dpsState.orbitMode;
+      if (angleEl) angleEl.value = String(dpsState.yyAngleDeg);
+      if (distanceEl) {
+        distanceEl.min = String(MOB_DISTANCE_MIN);
+        distanceEl.max = '100';
+        distanceEl.step = String(MOB_DISTANCE_STEP);
+        distanceEl.value = String(dpsState.mobDistancePct);
+      }
+      if (distanceStatusEl) distanceStatusEl.textContent = Math.round(dpsState.mobDistancePct) + '%';
+      if (zoomEl) {
+        zoomEl.min = String(SIM_ZOOM_MIN);
+        zoomEl.max = String(SIM_ZOOM_MAX);
+        zoomEl.step = String(SIM_ZOOM_STEP);
+        zoomEl.value = String(dpsState.simZoom);
+      }
+      if (zoomStatusEl) zoomStatusEl.textContent = Math.round(dpsState.simZoom * 100) + '%';
+      applyDpsSectionZoom();
+      const yyCount = getYinYangCount();
+      const active = isYyOrbitActive();
+      if (angleEl) angleEl.disabled = !active;
+      if (statusEl) {
+        statusEl.textContent = dpsState.orbitMode === 'yy' && !active
+          ? 'YY ' + yyCount + '/2'
+          : Math.round(dpsState.yyAngleDeg) + '\u00b0';
+      }
+    }
+
+    function applyDpsOrbitMode() {
+      updateDpsOrbitControls();
+      if (isYyOrbitActive()) {
+        dpsState.angle = getYyAngleRad();
+        dpsState.tickAccumulator = 0;
+        snapDpsSegmentsToOrbit();
+      }
+    }
+
+    function applyDpsSectionZoom() {
+      const wrap = document.querySelector('[data-tab="dps"] .dps-wrap');
+      if (wrap) wrap.style.zoom = '';
+      const simBox = document.querySelector('[data-tab="dps"] .sim-canvas-wrap');
+      if (simBox) simBox.style.zoom = '';
+    }
+
     function attachDpsEvents() {
       document.getElementById('dpsMobSelect').addEventListener('change', (e) => {
         dpsState.mobIdx = Number(e.target.value);
@@ -8216,11 +8377,29 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         document.getElementById('dpsToggle').textContent = dpsState.paused ? 'Start' : 'Stop';
         if (!dpsState.paused) { dpsState.lastFrameT = performance.now(); startDpsLoop(); }
       });
+      document.getElementById('dpsOrbitMode').addEventListener('change', (e) => {
+        dpsState.orbitMode = e.target.value === 'yy' ? 'yy' : 'wheel';
+        applyDpsOrbitMode();
+      });
+      document.getElementById('dpsYyAngle').addEventListener('input', (e) => {
+        dpsState.yyAngleDeg = Number(e.target.value) || 0;
+        applyDpsOrbitMode();
+      });
+      document.getElementById('dpsMobDistance').addEventListener('input', (e) => {
+        const pct = Number(e.target.value);
+        dpsState.mobDistancePct = Math.max(0, Math.min(100, Number.isFinite(pct) ? pct : MOB_DISTANCE_DEFAULT_PCT));
+        updateDpsOrbitControls();
+      });
+      document.getElementById('dpsSimZoom').addEventListener('input', (e) => {
+        const zoom = Number(e.target.value) || 1;
+        dpsState.simZoom = Math.max(SIM_ZOOM_MIN, Math.min(SIM_ZOOM_MAX, zoom));
+        updateDpsOrbitControls();
+      });
     }
 
     function resetDpsSim() {
       dpsState.simT = 0;
-      dpsState.angle = 0;
+      dpsState.angle = isYyOrbitActive() ? getYyAngleRad() : 0;
       dpsState.tickAccumulator = 0;
       dpsState.tickCount = 0;
       dpsState.lastFrameT = performance.now();
@@ -8249,6 +8428,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         }
         initSlotPhysics(i, ps, segCount, entry ? entry.idx : -1, segMaxHp);
       }
+      updateDpsOrbitControls();
       renderDpsTable();
     }
 
@@ -8270,7 +8450,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
           }
         }
         drawSimCanvas();
-        if (performance.now() - dpsState.lastStatsT > 200) {
+        if (performance.now() - dpsState.lastStatsT > SIM_STATS_UPDATE_MS) {
           renderDpsTable();
           dpsState.lastStatsT = performance.now();
         }
@@ -8285,9 +8465,23 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       return Math.max(14, 18 * size);
     }
 
+    function getMobDistanceShift() {
+      return dpsState.mobTier > 4 ? 10 : 5;
+    }
+
+    function getMobTouchDistance() {
+      return FLOWER_TOUCH_RADIUS + getMobDistanceShift();
+    }
+
+    function getMobDistanceFromPercent() {
+      const pct = Math.max(0, Math.min(100, Number(dpsState.mobDistancePct) || 0)) / 100;
+      const min = getMobTouchDistance();
+      const max = Math.max(min, MOB_DISTANCE_MAX);
+      return min + (max - min) * pct;
+    }
+
     function getMobCenterX() {
-      const shift = dpsState.mobTier > 4 ? 10 : 5;
-      return MOB_HITBOX_DISTANCE + getMobRadiusPx() - shift;
+      return getMobDistanceFromPercent() + getMobRadiusPx() - getMobDistanceShift();
     }
 
     function getMobDamage() {
@@ -8310,26 +8504,77 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     }
 
     function getOrbitAngularVelocity() {
+      if (isYyOrbitActive()) return 0;
       return -computeAngularVelocity();
     }
 
     function getSegmentHitRadius() { return getPetalDisplayRadius() * 0.7; }
+
+    function clampSegmentToOrbit(seg, targetR) {
+      const r = Math.sqrt(seg.pos.x * seg.pos.x + seg.pos.y * seg.pos.y);
+      if (!Number.isFinite(r) || r <= targetR || r <= 1e-4) return;
+      const erx = seg.pos.x / r;
+      const ery = seg.pos.y / r;
+      seg.pos.x = erx * targetR;
+      seg.pos.y = ery * targetR;
+      const outwardV = seg.vel.x * erx + seg.vel.y * ery;
+      if (outwardV > 0) {
+        seg.vel.x -= outwardV * erx;
+        seg.vel.y -= outwardV * ery;
+      }
+    }
+
+    function findSweptMobCollision(x0, y0, x1, y1, mobX, mobY, minDist) {
+      const vx = x1 - x0;
+      const vy = y1 - y0;
+      const ox = x0 - mobX;
+      const oy = y0 - mobY;
+      const a = vx * vx + vy * vy;
+      const c = ox * ox + oy * oy - minDist * minDist;
+      if (c > 0 && a > 1e-8) {
+        const b = 2 * (ox * vx + oy * vy);
+        const disc = b * b - 4 * a * c;
+        if (disc >= 0) {
+          const t = (-b - Math.sqrt(disc)) / (2 * a);
+          if (t >= 0 && t <= 1) {
+            const x = x0 + vx * t;
+            const y = y0 + vy * t;
+            const dx = x - mobX;
+            const dy = y - mobY;
+            const d = Math.sqrt(dx * dx + dy * dy) || 1e-4;
+            return { x: mobX + dx / d * minDist, y: mobY + dy / d * minDist, nx: dx / d, ny: dy / d };
+          }
+        }
+      }
+
+      const dx = x1 - mobX;
+      const dy = y1 - mobY;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < minDist * minDist) {
+        const d = Math.sqrt(d2) || 1e-4;
+        return { x: mobX + dx / d * minDist, y: mobY + dy / d * minDist, nx: dx / d, ny: dy / d };
+      }
+      return null;
+    }
 
     function simTick() {
       const dt = SIM_TICK_DT;
       const angularVel = getOrbitAngularVelocity();
       dpsState.lastAngularVel = angularVel;
       dpsState.simT += dt;
-      dpsState.angle += angularVel * dt;
+      if (isYyOrbitActive()) {
+        dpsState.angle = getYyAngleRad();
+      } else {
+        dpsState.angle += angularVel * dt;
+      }
       dpsState.tickCount++;
 
       const mobR = getMobRadiusPx();
       const segR = getSegmentHitRadius();
       const mobX = getMobCenterX();
       const mobY = 0;
-      const mobDamagePerTick = getMobDamage();
+      const mobDamagePerTick = getMobDamage() * (GAME_TICK_RATE / SIM_TICK_RATE);
       const minDist = segR + mobR;
-      const minDist2 = minDist * minDist;
 
       for (let i = 0; i < NUM_SLOTS; i++) {
         const entry = dpsState.loadout[i];
@@ -8343,7 +8588,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         if (!tier) continue;
         const petalBase = petals[entry.idx];
         const reloadBase = parseNumber(petalBase.reload) || 0;
-        const reloadSec = reloadBase > 0 ? reloadBase / 22.5 : 0;
+        const reloadSec = reloadBase > 0 ? reloadBase / GAME_TICK_RATE : ZERO_RELOAD_SEC;
         const N = Math.max(1, ps.segments.length);
         const segDmg = Number(tier.damage) || 0;
         const segMaxHp = (Number.isFinite(tier.health) ? tier.health : 0) / N;
@@ -8375,31 +8620,31 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
           const segEry = seg.pos.y / segR;
           const vRadial = seg.vel.x * segErx + seg.vel.y * segEry;
           const fr = -SPRING_K * (segR - targetR) - SPRING_DAMP * vRadial;
-          const newVRadial = vRadial + fr * dt;
-          const newSegR = segR + newVRadial * dt;
+          let newVRadial = vRadial + fr * dt;
+          let newSegR = segR + newVRadial * dt;
+          if (newSegR > targetR) {
+            newSegR = targetR;
+            newVRadial = Math.min(0, newVRadial);
+          }
           const tangentVx = -targetEry * newSegR * angularVel;
           const tangentVy = targetErx * newSegR * angularVel;
           seg.pos.x = targetErx * newSegR;
           seg.pos.y = targetEry * newSegR;
           seg.vel.x = newVRadial * targetErx + tangentVx;
           seg.vel.y = newVRadial * targetEry + tangentVy;
+          clampSegmentToOrbit(seg, targetR);
           if (noHit) continue;
 
-          const mdx = seg.pos.x - mobX;
-          const mdy = seg.pos.y - mobY;
-          const mdist2 = mdx * mdx + mdy * mdy;
-          if (mdist2 < minDist2) {
-            const mdist = Math.sqrt(mdist2) || 1e-4;
-            const nx = mdx / mdist;
-            const ny = mdy / mdist;
-            const overlap = minDist - mdist;
-            seg.pos.x += nx * overlap;
-            seg.pos.y += ny * overlap;
-            const vn = seg.vel.x * nx + seg.vel.y * ny;
+          const hit = findSweptMobCollision(seg.prevPos.x, seg.prevPos.y, seg.pos.x, seg.pos.y, mobX, mobY, minDist);
+          if (hit) {
+            seg.pos.x = hit.x;
+            seg.pos.y = hit.y;
+            const vn = seg.vel.x * hit.nx + seg.vel.y * hit.ny;
             if (vn < 0) {
-              seg.vel.x -= vn * nx;
-              seg.vel.y -= vn * ny;
+              seg.vel.x -= vn * hit.nx;
+              seg.vel.y -= vn * hit.ny;
             }
+            clampSegmentToOrbit(seg, targetR);
             const effectiveDmg = segDmg > dpsState.mobArmor ? segDmg : 0;
             ps.hits++;
             ps.damageDealt += effectiveDmg;
@@ -8414,7 +8659,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
             if (seg.hp <= 0) {
               seg.alive = false;
               ps.deaths++;
-              seg.reloadUntil = dpsState.simT + Math.max(0.05, reloadSec);
+              seg.reloadUntil = dpsState.simT + reloadSec;
             }
           }
         }
@@ -8424,8 +8669,8 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
     function drawSimCanvas() {
       const cv = document.getElementById('dpsSim');
       if (!cv) return;
-      const rect = cv.getBoundingClientRect();
-      const size = Math.max(80, Math.min(rect.width, rect.height) || rect.width || 400);
+      const box = cv.parentElement || cv;
+      const size = Math.max(80, Math.min(box.clientWidth, box.clientHeight) || box.clientWidth || 400);
       const dpr = window.devicePixelRatio || 1;
       const dw = Math.round(size * dpr);
       if (cv.width !== dw) { cv.width = dw; cv.height = dw; }
@@ -8435,8 +8680,8 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       ctx.fillStyle = '#555a64';
       ctx.fillRect(0, 0, size, size);
 
-      const worldHalf = ORBIT_RADIUS + 80;
-      const scale = (size / 2) / worldHalf;
+      const worldHalf = Math.max(ORBIT_RADIUS + 80, MOB_DISTANCE_MAX + getMobRadiusPx() * 2 + 40);
+      const scale = (size / 2) / worldHalf * dpsState.simZoom;
 
       ctx.save();
       ctx.beginPath();
@@ -8507,9 +8752,10 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
       if (centerImg && centerImg.complete && centerImg.naturalWidth) {
         ctx.save();
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const cx = size / 2 - CENTER_IMG_SIZE / 2;
-        const cy = size / 2 - CENTER_IMG_SIZE / 2;
-        ctx.drawImage(centerImg, cx, cy, CENTER_IMG_SIZE, CENTER_IMG_SIZE);
+        const flowerSize = CENTER_IMG_SIZE * dpsState.simZoom;
+        const cx = size / 2 - flowerSize / 2;
+        const cy = size / 2 - flowerSize / 2;
+        ctx.drawImage(centerImg, cx, cy, flowerSize, flowerSize);
         ctx.restore();
       }
       drawEquippedWearables(ctx, dpr, size);
@@ -8543,9 +8789,9 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
         if (!entry) continue;
         const placement = placements[name];
         ctx.save();
-        ctx.translate(size / 2 + placement.x, size / 2 + placement.y);
+        ctx.translate(size / 2 + placement.x * dpsState.simZoom, size / 2 + placement.y * dpsState.simZoom);
         if (placement.rotate) ctx.rotate(placement.rotate);
-        ctx.scale(placement.scale, placement.scale);
+        ctx.scale(placement.scale * dpsState.simZoom, placement.scale * dpsState.simZoom);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         try { FLOOF.drawUIPetal(entry.idx, entry.tier, ctx); } catch (_) {}
@@ -8650,6 +8896,7 @@ globalThis.MOB_DROPS = {"Ladybug":{"type":"simple","drops":[{"petal":"Light","pr
             dpsState.tier = pickedTier;
             redrawDpsSlots();
             resetDpsSim();
+            applyDpsOrbitMode();
           }
           hideTooltip();
           closePicker();
