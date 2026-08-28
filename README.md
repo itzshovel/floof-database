@@ -1,4 +1,8 @@
+
+
+
 # Floof Database
+Disclaimer: Generated partly with AI.
 
 A database for petals, mobs, and even a DPS simulation.
 
